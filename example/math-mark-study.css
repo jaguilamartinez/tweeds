@@ -1,0 +1,24 @@
+.pb-math-mark-study { min-width: 0; max-width: 960px; container-type: inline-size; }
+.pb-math-mark-study__specimens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.pb-math-mark-study figure { min-width: 0; margin: 0; padding-top: 16px; border-top: 1px solid var(--tw-color-line); }
+.pb-math-mark-study__drawing { position: relative; display: grid; place-items: center; min-height: 192px; padding: 32px; overflow: hidden; }
+.pb-math-mark-study__drawing::before, .pb-math-mark-study__drawing::after { position: absolute; content: ''; background: var(--tw-color-border); opacity: .28; pointer-events: none; }
+.pb-math-mark-study__drawing::before { inset: 50% 16px auto; height: 1px; }
+.pb-math-mark-study__drawing::after { inset: 16px auto 16px 50%; width: 1px; }
+.pb-math-mark-study__bounds { position: absolute; width: 144px; height: 144px; border: 1px solid var(--tw-color-border); opacity: .2; }
+.pb-math-mark-study__drawing > svg { position: relative; z-index: 1; max-width: 100%; height: auto; }
+.pb-math-mark-study figcaption { margin-top: 16px; }
+.pb-math-mark-study figcaption h3 { margin: 0 0 8px; font: 500 16px/1.4 var(--tw-font-ui); }
+.pb-math-mark-study figcaption p { margin: 0; color: var(--tw-color-muted); font: 400 14px/1.65 var(--tw-font-ui); }
+.pb-math-mark-study__editorial { display: flex; align-items: center; gap: 32px; margin-top: 40px; padding-block: 32px; border-block: 1px solid var(--tw-color-line); }
+.pb-math-mark-study__editorial > svg { flex-shrink: 0; }
+.pb-math-mark-study__editorial h3 { margin: 0 0 12px; font: 400 clamp(36px, 4vw, 52px)/1.1 var(--tw-font-display); letter-spacing: -.02em; }
+.pb-math-mark-study__editorial p { max-width: 45ch; margin: 0; color: var(--tw-color-muted); font: 400 15px/1.7 var(--tw-font-ui); }
+@container (max-width: 680px) { .pb-math-mark-study__specimens { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 500px) {
+  .pb-math-mark-study__editorial { align-items: flex-start; gap: 24px; }
+  .pb-math-mark-study__editorial > svg { width: 80px; height: 80px; }
+}
+@container (max-width: 460px) { .pb-math-mark-study__specimens { grid-template-columns: 1fr; gap: 28px; } }
+@container (max-width: 380px) { .pb-math-mark-study__editorial { flex-direction: column; } }
+@media print { .pb-math-mark-study figure, .pb-math-mark-study__editorial { break-inside: avoid; } }

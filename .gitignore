@@ -1,0 +1,16 @@
+node_modules/
+dist/
+example-dist/
+storybook-static/
+playwright-report/
+test-results/
+coverage/
+*.tgz
+*.log
+.dependency-cache/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.pnpm-store/

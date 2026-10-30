@@ -1,0 +1,34 @@
+@import './tokens.css';
+@import './components.css';
+@import './brand.css';
+
+.tw-theme { background: var(--tw-color-bg); color: var(--tw-color-text); font-family: var(--tw-font-ui); line-height: var(--tw-line-height-body); }
+.tw-theme *, .tw-theme *::before, .tw-theme *::after { box-sizing: border-box; }
+:where(.tw-theme) :where(button, input, select, textarea) { font: inherit; }
+:where(.tw-theme) :where(button, a, input, select, textarea, [tabindex]):focus-visible { outline: var(--tw-focus-width) solid var(--tw-color-focus); outline-offset: var(--tw-focus-offset); }
+.tw-theme :where(h1, h2, h3, p, figure) { margin: 0; }
+.tw-theme :where(a) { color: inherit; }
+@media (prefers-reduced-motion: reduce) {
+  .tw-theme *, .tw-theme *::before, .tw-theme *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+@media print {
+  [data-tw-theme] {
+    --tw-color-bg: var(--tw-color-cream);
+    --tw-color-surface: var(--tw-color-paper-white);
+    --tw-color-text: var(--tw-color-charcoal);
+    --tw-color-muted: var(--tw-color-paper-muted);
+    --tw-color-border: var(--tw-color-paper-border);
+    --tw-color-line: var(--tw-color-paper-line);
+    --tw-color-action: var(--tw-color-charcoal);
+    --tw-color-action-text: var(--tw-color-cream);
+    --tw-color-accent: var(--tw-color-signal-orange);
+    --tw-color-discovery: var(--tw-color-lime);
+    --tw-color-focus: var(--tw-color-charcoal);
+    --tw-color-error: var(--tw-color-charcoal);
+    --tw-color-error-border: var(--tw-color-charcoal);
+    color-scheme: light;
+    print-color-adjust: exact;
+  }
+  .tw-theme button, .tw-nav { display: none !important; }
+  .tw-theme a { text-decoration: underline; }
+}

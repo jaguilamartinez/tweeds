@@ -1,0 +1,86 @@
+{
+  "name": "@tinker-works/ui",
+  "version": "0.1.0",
+  "description": "Tweeds — the Tinker Works Design System.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaguilamartinez/tweeds.git"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js"
+    },
+    "./tokens.json": "./dist/tokens.json",
+    "./styles.css": "./dist/styles.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./assets/*": "./dist/assets/*"
+  },
+  "scripts": {
+    "dev": "pnpm tokens:build && vite --host 127.0.0.1",
+    "tokens:build": "node scripts/build-tokens.mjs",
+    "build": "pnpm tokens:build && vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json && node scripts/copy-assets.mjs",
+    "build:example": "pnpm build && pnpm test:types && tsc -p tsconfig.example.json && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:types": "tsc -p tests/types/tsconfig.bundler.json && tsc -p tests/types/tsconfig.nodenext.json",
+    "test:browser": "playwright test --grep-invert @visual",
+    "test:visual": "playwright test --grep @visual",
+    "test:visual:update": "playwright test --grep @visual --update-snapshots=all",
+    "storybook": "pnpm tokens:build && storybook dev -p 6006 --host 127.0.0.1 --no-open",
+    "build-storybook": "pnpm tokens:build && storybook build",
+    "check": "pnpm typecheck && pnpm test && pnpm build:example && pnpm build-storybook",
+    "prepack": "pnpm build"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0 <20",
+    "react-dom": ">=19.0.0 <20"
+  },
+  "devDependencies": {
+    "@fontsource/dm-serif-display": "5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.2.0",
+    "@fontsource/instrument-serif": "^5.2.0",
+    "@fontsource/space-grotesk": "^5.2.0",
+    "@playwright/test": "1.56.1",
+    "@storybook/addon-a11y": "^10.0.0",
+    "@storybook/addon-docs": "^10.0.0",
+    "@storybook/react-vite": "^10.0.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "axe-core": "^4.11.0",
+    "jsdom": "^26.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "storybook": "^10.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.10",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@11.25.0"
+}

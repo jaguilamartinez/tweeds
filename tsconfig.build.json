@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false, "allowImportingTsExtensions": false,
+    "declaration": true, "emitDeclarationOnly": true, "declarationMap": true,
+    "outDir": "dist", "rootDir": "src"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["**/*.test.*", "**/*.stories.*"]
+}

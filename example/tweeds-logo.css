@@ -1,0 +1,4 @@
+.pb-tweeds-logo { display: inline-block; width: 240px; max-width: 100%; color: var(--tw-color-text); font-synthesis: none; line-height: 0; vertical-align: middle; }
+.pb-tweeds-logo svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pb-tweeds-logo__wordmark { font-family: var(--tw-font-logo); font-weight: var(--tw-logo-font-weight); font-style: normal; letter-spacing: var(--tw-logo-letter-spacing); }
+.pb-tweeds-logo__descriptor { font-family: var(--tw-font-ui); font-weight: 400; font-style: normal; letter-spacing: 0; }

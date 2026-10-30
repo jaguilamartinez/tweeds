@@ -1,0 +1,6 @@
+.tw-highlight-overlay { position: relative; display: inline-block; isolation: isolate; max-width: 100%; vertical-align: top; }
+.tw-highlight-overlay::after { position: absolute; inset: 0; content: ''; pointer-events: none; background: var(--tw-color-accent); opacity: var(--tw-highlight-overlay-orange-opacity); }
+.tw-highlight-overlay--lime::after { background: var(--tw-color-discovery); opacity: var(--tw-highlight-overlay-lime-opacity); }
+.tw-highlight-overlay > :where(svg, img, canvas) { display: block; max-width: 100%; height: auto; }
+.tw-math-mark { display: inline-block; max-width: 100%; height: auto; color: var(--tw-color-accent); vertical-align: middle; }
+.tw-math-mark--lime { color: var(--tw-color-discovery); }

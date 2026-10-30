@@ -1,0 +1,64 @@
+.pb-geometry {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  container-type: inline-size;
+  color: var(--tw-color-text);
+}
+.pb-geometry-drawing { display: block; width: 100%; height: auto; overflow: hidden; }
+.pb-geometry--overview { max-width: 520px; }
+.pb-geometry--specimen { max-width: 900px; }
+.pb-geometry--specimen > .pb-geometry-drawing--compact { display: none; }
+.pb-geometry-lines { fill: none; stroke: currentColor; stroke-width: .85; stroke-linecap: round; stroke-linejoin: round; }
+.pb-geometry-lines :where(path, circle), .pb-geometry-grid-line { vector-effect: non-scaling-stroke; }
+.pb-geometry-grid-line { fill: none; stroke: var(--tw-color-line); stroke-width: .5; opacity: .65; }
+.pb-geometry-sheet { fill: var(--tw-color-bg); fill-opacity: .97; stroke-width: 1.3; }
+.pb-geometry-construction { stroke: var(--tw-color-border); stroke-width: .6; opacity: .58; }
+.pb-geometry-second-pass { stroke: var(--tw-color-border); stroke-width: .6; opacity: .7; }
+.pb-geometry-axis { stroke: var(--tw-color-border); stroke-width: .65; stroke-dasharray: 11 4 2 4; opacity: .8; }
+.pb-geometry-projection { stroke: var(--tw-color-border); stroke-width: .65; stroke-dasharray: 3 4; }
+.pb-geometry-divider { stroke: var(--tw-color-line); stroke-width: .8; }
+.pb-geometry-ink { stroke-width: 1.2; }
+.pb-geometry-hatch { stroke-width: .65; opacity: .65; }
+.pb-geometry-register { stroke-width: .75; }
+.pb-geometry-selection { stroke: none; fill: var(--tw-color-text); fill-opacity: .08; }
+.pb-geometry-marker { stroke: none; }
+.pb-geometry-marker--lime { fill: var(--tw-color-discovery); fill-opacity: .78; }
+.pb-geometry-marker--orange { fill: var(--tw-color-accent); fill-opacity: .9; }
+.pb-geometry-button-ink { stroke: var(--tw-color-charcoal); stroke-width: 1.2; }
+.pb-geometry-highlight-ink { stroke: var(--tw-color-charcoal); stroke-width: 1.2; }
+.pb-geometry-cursor { fill: var(--tw-color-bg); stroke-width: 1.2; }
+.pb-geometry-exploration { stroke: var(--tw-color-accent); stroke-width: 1.05; }
+.pb-geometry-dimension { stroke-width: .75; }
+.pb-geometry-leader { stroke-width: .8; }
+.pb-geometry-label { fill: var(--tw-color-muted); stroke: none; font: 400 13px/1 var(--tw-font-mono); letter-spacing: .01em; }
+.pb-geometry-handnote { fill: var(--tw-color-text); stroke: none; font: italic 22px/1 var(--tw-font-display); }
+.pb-geometry-pen-note { stroke-width: .8; }
+.pb-geometry-layer { transition: transform var(--tw-motion-mechanism) var(--tw-motion-ease); }
+.pb-geometry-layer--content { transform: translateY(-48px); }
+.pb-geometry-layer--interaction { transform: translateY(-140px); }
+.pb-geometry-separated-notes { transition: opacity var(--tw-motion-base) var(--tw-motion-ease); }
+.pb-geometry[data-layer-view="assembled"] .pb-geometry-layer { transform: translateY(0); }
+.pb-geometry[data-layer-view="assembled"] .pb-geometry-separated-notes { opacity: 0; }
+.pb-geometry figcaption { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 12px 24px; margin: 0 0 20px; color: var(--tw-color-muted); font: 400 13px/1.7 var(--tw-font-ui); }
+.pb-geometry figcaption > span:first-child { max-width: 65ch; }
+.pb-geometry-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: var(--tw-size-touch); padding: 8px 0; border: 0; border-bottom: 1px solid var(--tw-color-border); border-radius: 0; color: var(--tw-color-text); background: transparent; font: 500 13px/1.4 var(--tw-font-ui); cursor: pointer; }
+.pb-geometry-toggle:hover { border-bottom-color: var(--tw-color-text); }
+.pb-geometry-toggle:focus-visible { outline: var(--tw-focus-width) solid var(--tw-color-focus); outline-offset: var(--tw-focus-offset); }
+.pb-geometry-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@container (max-width: 650px) {
+  .pb-geometry--specimen > .pb-geometry-drawing--wide { display: none; }
+  .pb-geometry--specimen > .pb-geometry-drawing--compact { display: block; }
+}
+@container (max-width: 420px) {
+  .pb-geometry-drawing--compact .pb-geometry-label { font-size: 18px; }
+  .pb-geometry-drawing--compact .pb-geometry-handnote { font-size: 25px; }
+}
+@container (max-width: 340px) {
+  .pb-geometry-drawing--compact .pb-geometry-label { font-size: 24px; }
+  .pb-geometry-drawing--compact .pb-geometry-handnote, .pb-geometry-drawing--compact .pb-geometry-pen-note { display: none; }
+  .pb-geometry-drawing--compact .pb-geometry-projection { opacity: .5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pb-geometry-layer, .pb-geometry-separated-notes { transition: none; }
+}
