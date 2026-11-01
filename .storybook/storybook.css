@@ -1,6 +1,6 @@
 /* The canvas around a story takes the story's theme. */
-body.sb-show-main { background: var(--tw-color-cream); }
-body.sb-show-main:has(#storybook-root > [data-tw-theme='ink']) { background: var(--tw-color-charcoal); }
+body.sb-show-main { background: var(--tw-color-ink); }
+body.sb-show-main:has(#storybook-root > [data-tw-theme='paper']) { background: var(--tw-color-paper); }
 .tw-story-stage { min-height: 160px; padding: var(--tw-space-lg); color: var(--tw-color-text); background: var(--tw-color-bg); }
 /* Each canvas is a small drawing sheet with registration marks in its corners. */
 .tw-story-stage { --tw-stage-mark: color-mix(in srgb, var(--tw-color-border) 65%, transparent); background-repeat: no-repeat; background-image:
@@ -56,4 +56,4 @@ body.sb-show-main:has(#storybook-root > [data-tw-theme='ink']) { background: var
   .tw-pattern-hero, .tw-pattern-sidebar, .tw-mechanism-steps { grid-template-columns: 1fr; gap: 24px; }
   .tw-pattern-hero { padding-top: 32px; }
 }
-@media print { .tw-story-stage, [data-tw-theme='ink'] .tw-story-stage { color: var(--tw-color-charcoal); background: var(--tw-color-cream); } .tw-reference, .tw-pattern { max-width: none; } }
+@media print { .tw-story-stage, [data-tw-theme='ink'] .tw-story-stage { color: var(--tw-color-ink); background: var(--tw-color-paper); } .tw-reference, .tw-pattern { max-width: none; } }

@@ -3,7 +3,7 @@ import { HighlightOverlay, brandTokens, primitiveTokens, useReveal } from '@tink
 import { FigureStudy } from './FigureStudy';
 import './brand-studies.css';
 
-const colorLabels = { cream: 'Cream', charcoal: 'Charcoal', stone: 'Stone', signalOrange: 'Signal orange', lime: 'Lime' };
+const colorLabels = { ink: 'Ink', paper: 'Paper', graphite: 'Graphite', signalOrange: 'Signal orange', lime: 'Lime' };
 const colorUsage = Object.entries(brandTokens.colorUsage) as [keyof typeof colorLabels, string][];
 
 const at = (milliseconds: number) => ({ '--tw-reveal-at': `${milliseconds}ms` }) as CSSProperties;

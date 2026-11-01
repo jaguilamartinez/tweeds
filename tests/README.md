@@ -15,13 +15,13 @@ marks have their own visual specimen; they remain separate from functional icons
 Brand tests also check that highlight overlays preserve accessible child content,
 native attributes, and keyboard actions. Browser checks compare button state
 heights and confirm that the motion preview reaches both ends of its track.
-They load the bundled DM Serif Display face, check that all logo variants render
+They load the bundled Instrument Serif face, check that all logo variants render
 without an outline or synthetic weight, and verify space between the stacked
 words. Filled tag colors, the lime status dot, and the selected tab underline are
 checked in both themes.
 
 The print-media regression checks every semantic color role and verifies that
-Ink form errors become charcoal on cream in print. `pnpm test:types` checks the
+Ink form errors become ink on paper in print. `pnpm test:types` checks the
 built public exports through independent strict Bundler and NodeNext consumers,
 without JSON resolution, Vite ambient types, or skipped declaration checking.
 Run `pnpm build` first, or use `pnpm build:example`, which includes both fixtures.

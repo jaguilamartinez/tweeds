@@ -1,10 +1,10 @@
 # Tweeds
 
-Tweeds is the design system for Tinker Works. It includes a React component library and a playbook for colors, typography, icons, and common interface patterns. There are two themes: Paper and Ink.
+Tweeds is the design system for Tinker Works. It includes a React component library and a playbook for colors, typography, icons, and common interface patterns. There are two themes: Ink, the default, and Paper.
 
 **From curiosity to real things.**
 
-![The Tweeds playbook, with its wordmark, interface drawing, and links to the design system reference.](docs/images/overview.png)
+![The Tweeds playbook in Ink: the brand statement beside a self-drafting interface drawing, with the title block below.](docs/images/overview.png)
 
 ## Run locally
 
@@ -46,16 +46,16 @@ import '@tinker-works/ui/fonts.css';
 
 export function App() {
   return (
-    <ThemeProvider theme="paper">
+    <ThemeProvider theme="ink">
       <Button>Save changes</Button>
     </ThemeProvider>
   );
 }
 ```
 
-Use `theme="ink"` for the dark theme. Fonts are bundled locally; omit `fonts.css` if your app already serves them.
+Use `theme="paper"` for the light theme. Fonts are bundled locally; omit `fonts.css` if your app already serves them.
 
-![The component reference in Ink, showing default, disabled, and loading buttons.](docs/images/components.png)
+![The component reference in Paper, showing default, disabled, and loading buttons.](docs/images/components.png)
 
 ## Development
 

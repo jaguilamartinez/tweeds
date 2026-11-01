@@ -1,10 +1,10 @@
 .tw-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .tw-logo { display: inline-block; flex-shrink: 0; color: var(--tw-color-text); font-family: var(--tw-font-logo); font-size: 70px; font-synthesis: none; line-height: 0; }
-.tw-logo__art { display: block; width: 3em; height: auto; overflow: visible; }
+.tw-logo__art { display: block; width: 2.6em; height: auto; overflow: visible; }
 .tw-logo__art text { font-family: var(--tw-font-logo); font-style: normal; font-weight: var(--tw-logo-font-weight); letter-spacing: var(--tw-logo-letter-spacing); }
 .tw-logo--compact { font-size: 39px; }
 .tw-logo--monogram { font-size: 52px; }
-.tw-logo--monogram .tw-logo__art { width: 1.78em; height: .84em; }
+.tw-logo--monogram .tw-logo__art { width: 1.36em; height: .9em; }
 .tw-button { --tw-button-backdrop: var(--tw-color-bg); --tw-button-sheet: 0px; appearance: none; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--tw-space-sm); min-height: var(--tw-button-height-md); border: 1px solid transparent; border-radius: var(--tw-button-radius); padding: 10px 16px; font-family: var(--tw-font-ui); font-size: 14px; font-weight: 400; line-height: 1.4; text-decoration: none; cursor: pointer; transition: background-color var(--tw-motion-fast), background-size var(--tw-motion-mark) var(--tw-motion-ease-mark), color var(--tw-motion-fast), border-color var(--tw-motion-fast), opacity var(--tw-motion-fast), translate var(--tw-motion-fast) var(--tw-motion-ease), box-shadow var(--tw-motion-base) var(--tw-motion-ease-mechanism); }
 /* A second sheet slides out behind the button on hover, like a second pass of the pen. Outer shadows never paint under the button. */
 .tw-button:not(.tw-button--tertiary) { box-shadow: var(--tw-button-sheet) var(--tw-button-sheet) 0 -1px var(--tw-button-backdrop), var(--tw-button-sheet) var(--tw-button-sheet) 0 0 color-mix(in srgb, var(--tw-color-text) 55%, transparent); }
@@ -17,7 +17,7 @@
 .tw-button--secondary { color: var(--tw-color-text); background: transparent; border-color: var(--tw-color-border); }
 .tw-button--tertiary { color: var(--tw-color-text); background: transparent; padding-inline: 0; border-radius: 0; }
 /* Signal sweeps a lighter mark across on hover. */
-.tw-button--signal { color: var(--tw-color-charcoal); background: linear-gradient(color-mix(in srgb, var(--tw-color-accent) 76%, var(--tw-color-cream)) 0 0) no-repeat left / 0% 100%, var(--tw-color-accent); border-color: var(--tw-color-accent); }
+.tw-button--signal { color: var(--tw-color-ink); background: linear-gradient(color-mix(in srgb, var(--tw-color-accent) 76%, var(--tw-color-paper)) 0 0) no-repeat left / 0% 100%, var(--tw-color-accent); border-color: var(--tw-color-accent); }
 .tw-button--sm { min-height: var(--tw-button-height-sm); padding: 8px 12px; font-size: 13px; }
 .tw-button--lg { min-height: var(--tw-button-height-lg); padding: 14px 24px; font-size: 16px; }
 .tw-button__icon { display: inline-flex; flex-shrink: 0; align-items: center; }
@@ -42,8 +42,8 @@
 .tw-text-link__label { padding-bottom: 3px; background: linear-gradient(var(--tw-color-accent) 0 0) no-repeat left bottom / 0% 2px, linear-gradient(currentColor 0 0) no-repeat left bottom / 100% 1px; transition: background-size var(--tw-motion-base) var(--tw-motion-ease-pen); }
 .tw-text-link:hover .tw-text-link__label { background-size: 100% 2px, 100% 1px; }
 .tw-tag { display: inline-flex; align-items: center; gap: var(--tw-space-sm); border: 1px solid var(--tw-color-border); border-radius: var(--tw-tag-radius); padding: 3px 7px; color: var(--tw-color-text); background: transparent; font-family: var(--tw-font-mono); font-size: var(--tw-tag-font-size); font-weight: 400; line-height: 1.4; letter-spacing: .025em; text-transform: uppercase; white-space: nowrap; }
-.tw-tag--orange { color: var(--tw-color-charcoal); background: var(--tw-color-accent); border-color: var(--tw-color-accent); }
-.tw-tag--lime { color: var(--tw-color-charcoal); background: var(--tw-color-discovery); border-color: var(--tw-color-discovery); }
+.tw-tag--orange { color: var(--tw-color-ink); background: var(--tw-color-accent); border-color: var(--tw-color-accent); }
+.tw-tag--lime { color: var(--tw-color-ink); background: var(--tw-color-discovery); border-color: var(--tw-color-discovery); }
 .tw-tag:has(.tw-tag__status) { padding-inline: 0; color: var(--tw-color-text); background: transparent; border-color: transparent; }
 .tw-tag__status { width: 5px; height: 5px; flex-shrink: 0; border-radius: 50%; background: var(--tw-color-discovery); }
 .tw-tag--orange .tw-tag__status { background: var(--tw-color-accent); }
@@ -81,8 +81,8 @@
 /* On: lime sweeps across the track and the thumb springs over. */
 .tw-switch__track { display: block; width: 36px; height: 20px; border: 1px solid var(--tw-color-border); border-radius: 12px; background: linear-gradient(var(--tw-color-discovery) 0 0) no-repeat left / 0% 100%; transition: background-size var(--tw-motion-base) var(--tw-motion-ease-mark), border-color var(--tw-motion-fast); }
 .tw-switch__thumb { display: block; width: 12px; height: 12px; border-radius: 50%; margin: 3px; background: var(--tw-color-text); transition: transform var(--tw-motion-base) var(--tw-motion-ease-mechanism), background-color var(--tw-motion-fast); }
-.tw-switch__control[aria-checked='true'] .tw-switch__track { background-size: 100% 100%; border-color: var(--tw-color-charcoal); }
-.tw-switch__control[aria-checked='true'] .tw-switch__thumb { background: var(--tw-color-charcoal); transform: translateX(16px); }
+.tw-switch__control[aria-checked='true'] .tw-switch__track { background-size: 100% 100%; border-color: var(--tw-color-ink); }
+.tw-switch__control[aria-checked='true'] .tw-switch__thumb { background: var(--tw-color-ink); transform: translateX(16px); }
 .tw-switch label { cursor: pointer; }
 .tw-switch:has(button:disabled) { opacity: .5; }
 .tw-switch__control:disabled, .tw-switch:has(button:disabled) label { cursor: not-allowed; }

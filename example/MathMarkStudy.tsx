@@ -4,7 +4,7 @@ import './math-mark-study.css';
 
 const examples = [
   { symbol: 'plus', tone: 'orange', name: 'Plus', caption: 'Equal arms and square ends.' },
-  { symbol: 'minus', tone: 'lime', name: 'Minus', caption: 'Lime on charcoal keeps the shape clear.' },
+  { symbol: 'minus', tone: 'lime', name: 'Minus', caption: 'Lime on ink keeps the shape clear.' },
   { symbol: 'asterisk', tone: 'orange', name: 'Asterisk', caption: 'A filled asterisk with square ends.' },
 ] as const;
 

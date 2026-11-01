@@ -6,6 +6,6 @@ export interface ThemeProviderProps extends HTMLAttributes<HTMLDivElement> {
   motion?: 'auto' | 'off';
 }
 /** Scope token overrides to a subtree. Explicit themes render identically on the server. */
-export const ThemeProvider = forwardRef<HTMLDivElement, ThemeProviderProps>(function ThemeProvider({ theme = 'paper', motion = 'auto', className = '', ...props }, ref) {
+export const ThemeProvider = forwardRef<HTMLDivElement, ThemeProviderProps>(function ThemeProvider({ theme = 'ink', motion = 'auto', className = '', ...props }, ref) {
   return <div {...props} ref={ref} data-tw-theme={theme} data-tw-motion={motion === 'off' ? 'off' : undefined} className={`tw-theme ${className}`} />;
 });

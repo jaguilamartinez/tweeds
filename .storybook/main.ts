@@ -1,6 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 
-const fontFiles = ['dm-serif-display', 'instrument-serif', 'space-grotesk', 'ibm-plex-mono']
+const fontFiles = ['instrument-serif', 'instrument-sans', 'ibm-plex-mono']
   .map(name => ({ from: `../node_modules/@fontsource/${name}/files`, to: '/fonts' }));
 
 const config: StorybookConfig = {

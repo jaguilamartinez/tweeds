@@ -5,7 +5,7 @@ const meta = {
   title: 'Components/Tag', component: Tag,
   args: { children: 'Experiment', tone: 'neutral', status: false },
   argTypes: { tone: { control: 'inline-radio', options: ['neutral', 'orange', 'lime'] } },
-  parameters: { docs: { description: { component: 'Compact technical labels use uppercase IBM Plex Mono and very small corners. Neutral categories and IDs have thin outlines. Orange and lime category tags use solid brand fills with charcoal text in both themes. Status tags stay open: the default lime dot marks progress, and an explicit orange tone marks attention. Always write the status in words; color is supporting information. Tags are labels, not buttons or filters, and their compact size does not imply an interactive target.' } } },
+  parameters: { docs: { description: { component: 'Compact technical labels use uppercase IBM Plex Mono and very small corners. Neutral categories and IDs have thin outlines. Orange and lime category tags use solid brand fills with ink text in both themes. Status tags stay open: the default lime dot marks progress, and an explicit orange tone marks attention. Always write the status in words; color is supporting information. Tags are labels, not buttons or filters, and their compact size does not imply an interactive target.' } } },
 } satisfies Meta<typeof Tag>;
 export default meta;
 type Story = StoryObj<typeof meta>;

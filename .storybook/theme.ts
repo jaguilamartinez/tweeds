@@ -5,7 +5,7 @@ const { color, font, radius } = primitiveTokens;
 // The manager loads these faces itself; see manager-head.html.
 const ui = font.ui.replace(/'/g, '"');
 const mono = font.mono.replace(/'/g, '"');
-const wordmark = (ink: string) => `<span style="font:400 32px/1 'DM Serif Display', Georgia, serif;letter-spacing:-0.018em;color:${ink}">Tweeds</span>`;
+const wordmark = (ink: string) => `<span style="font:400 32px/1 'Instrument Serif', Georgia, serif;letter-spacing:-0.01em;color:${ink}">Tweeds</span>`;
 
 const shared = {
   brandUrl: './',
@@ -17,56 +17,56 @@ const shared = {
   colorPrimary: color.signalOrange,
 } as const;
 
-/** Paper: cream sheets, charcoal ink, orange for the item under discussion. */
+/** Paper: a soft white sheet, ink text, orange for the item under discussion. */
 export const paperTheme = create({
   ...shared,
   base: 'light',
-  brandTitle: wordmark(color.charcoal),
-  colorSecondary: color.charcoal,
-  appBg: color.cream,
-  appContentBg: color.cream,
-  appPreviewBg: color.cream,
+  brandTitle: wordmark(color.ink),
+  colorSecondary: color.ink,
+  appBg: color.paper,
+  appContentBg: color.paper,
+  appPreviewBg: color.paper,
   appBorderColor: color.paperLine,
   appHoverBg: color.paperWhite,
-  textColor: color.charcoal,
-  textInverseColor: color.cream,
+  textColor: color.ink,
+  textInverseColor: color.paper,
   textMutedColor: color.paperMuted,
   barBg: color.paperWhite,
   barTextColor: color.paperMuted,
-  barHoverColor: color.charcoal,
+  barHoverColor: color.ink,
   barSelectedColor: color.signalOrange,
   buttonBg: color.paperWhite,
   buttonBorder: color.paperBorder,
-  booleanBg: color.cream,
+  booleanBg: color.paper,
   booleanSelectedBg: color.paperWhite,
   inputBg: color.paperWhite,
   inputBorder: color.paperBorder,
-  inputTextColor: color.charcoal,
+  inputTextColor: color.ink,
 });
 
-/** Ink: the same structure on charcoal, with lime for keyboard focus. */
+/** Ink, the default: paper-colored text on blue-black ink, with lime for keyboard focus. */
 export const inkTheme = create({
   ...shared,
   base: 'dark',
-  brandTitle: wordmark(color.cream),
+  brandTitle: wordmark(color.paper),
   colorSecondary: color.lime,
-  appBg: color.charcoal,
-  appContentBg: color.charcoal,
-  appPreviewBg: color.charcoal,
+  appBg: color.ink,
+  appContentBg: color.ink,
+  appPreviewBg: color.ink,
   appBorderColor: color.inkLine,
   appHoverBg: color.inkSurface,
-  textColor: color.cream,
-  textInverseColor: color.charcoal,
+  textColor: color.paper,
+  textInverseColor: color.ink,
   textMutedColor: color.inkMuted,
   barBg: color.inkSurface,
   barTextColor: color.inkMuted,
-  barHoverColor: color.cream,
+  barHoverColor: color.paper,
   barSelectedColor: color.signalOrange,
   buttonBg: color.inkSurface,
   buttonBorder: color.inkBorder,
-  booleanBg: color.charcoal,
+  booleanBg: color.ink,
   booleanSelectedBg: color.inkSurface,
   inputBg: color.inkSurface,
   inputBorder: color.inkBorder,
-  inputTextColor: color.cream,
+  inputTextColor: color.paper,
 });

@@ -15,7 +15,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'MathMark is a large brand graphic, separate from utility icons. Equal square-ended filled bars form the plus, minus, and six-arm asterisk on a 96-unit grid. Use at least 48px; 96–160px gives the shapes comfortable presence. Leave at least a quarter of the displayed mark width as clear space around the mark and use one mark per composition. Orange and lime remain the same in Paper and Ink; lime reads most clearly on charcoal. No essential content should rely on decorative color. These graphic accents are decorative, so their colors do not need to meet text contrast. Do not substitute a mark for an action icon, status indicator, mathematical text, or a readable label. Marks are decorative and hidden from assistive technology by default. Provide label only when a standalone graphic conveys information that is not already in nearby copy; it then exposes an image role and accessible name. Native SVG attributes, className, and React19 refs are supported.',
+        component: 'MathMark is a large brand graphic, separate from utility icons. Equal square-ended filled bars form the plus, minus, and six-arm asterisk on a 96-unit grid. Use at least 48px; 96–160px gives the shapes comfortable presence. Leave at least a quarter of the displayed mark width as clear space around the mark and use one mark per composition. Orange and lime remain the same in Paper and Ink; lime reads most clearly on ink. No essential content should rely on decorative color. These graphic accents are decorative, so their colors do not need to meet text contrast. Do not substitute a mark for an action icon, status indicator, mathematical text, or a readable label. Marks are decorative and hidden from assistive technology by default. Provide label only when a standalone graphic conveys information that is not already in nearby copy; it then exposes an image role and accessible name. Native SVG attributes, className, and React19 refs are supported.',
       },
     },
   },
@@ -35,7 +35,7 @@ export const SmallAndLarge: Story = {
 };
 
 export const PaperAndInk: Story = {
-  render: () => <div className="tw-story-grid">{(['paper', 'ink'] as const).flatMap(theme => (['orange', 'lime'] as const).map(tone => <ThemeProvider key={`${theme}-${tone}`} theme={theme}><div className="tw-story-stack" style={{ padding: 32, minHeight: 208, border: '1px solid var(--tw-color-line)' }}><p className="tw-story-label">{theme} / {tone}</p><MathMark symbol="plus" tone={tone} /></div></ThemeProvider>))}</div>,
+  render: () => <div className="tw-story-grid">{(['ink', 'paper'] as const).flatMap(theme => (['orange', 'lime'] as const).map(tone => <ThemeProvider key={`${theme}-${tone}`} theme={theme}><div className="tw-story-stack" style={{ padding: 32, minHeight: 208, border: '1px solid var(--tw-color-line)' }}><p className="tw-story-label">{theme} / {tone}</p><MathMark symbol="plus" tone={tone} /></div></ThemeProvider>))}</div>,
 };
 
 export const MeaningfulLabel: Story = {

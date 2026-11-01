@@ -5,7 +5,7 @@ import { ThemeProvider, type Theme } from '../src/index';
 import { inkTheme, paperTheme } from './theme';
 
 type GlobalsContext = DocsContainerProps['context'] & { store?: { userGlobals?: { get(): Record<string, unknown> } } };
-const themeOf = (globals?: Record<string, unknown>): Theme => globals?.theme === 'ink' ? 'ink' : 'paper';
+const themeOf = (globals?: Record<string, unknown>): Theme => globals?.theme === 'paper' ? 'paper' : 'ink';
 
 /** Docs pages take the toolbar theme too, so prose and examples sit on the same sheet. */
 export function TweedsDocsContainer({ context, children }: PropsWithChildren<DocsContainerProps>) {

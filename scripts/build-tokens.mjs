@@ -14,7 +14,7 @@ function flatten(object, path = []) {
   return Object.entries(object).flatMap(([key, value]) => typeof value === 'object' ? flatten(value, [...path, key]) : [[...path, key].map(kebab).join('-') + ': ' + resolve(value)]);
 }
 const block = (selector, data) => `${selector} {\n${flatten(data).map(value => `  --tw-${value};`).join('\n')}\n}`;
-const css = `/* Generated from src/tokens.json. Run pnpm tokens:build. */\n${block(':root, [data-tw-theme]', tokens.primitive)}\n${block(':root, [data-tw-theme="paper"]', tokens.semantic.paper)}\n${block('[data-tw-theme="ink"]', tokens.semantic.ink)}\n${block(':root, [data-tw-theme]', tokens.component)}\n${block(':root, [data-tw-theme]', { brand: tokens.brand })}\n[data-tw-theme="paper"] { color-scheme: light; }\n[data-tw-theme="ink"] { color-scheme: dark; }\n`;
+const css = `/* Generated from src/tokens.json. Run pnpm tokens:build. */\n${block(':root, [data-tw-theme]', tokens.primitive)}\n${block(':root, [data-tw-theme="ink"]', tokens.semantic.ink)}\n${block('[data-tw-theme="paper"]', tokens.semantic.paper)}\n${block(':root, [data-tw-theme]', tokens.component)}\n${block(':root, [data-tw-theme]', { brand: tokens.brand })}\n:root, [data-tw-theme="ink"] { color-scheme: dark; }\n[data-tw-theme="paper"] { color-scheme: light; }\n`;
 await mkdir(new URL('../src/styles/', import.meta.url), { recursive: true });
 await writeFile(new URL('../src/styles/tokens.css', import.meta.url), css);
 console.log('Generated design tokens.');
