@@ -2,7 +2,7 @@ html { scroll-behavior: smooth; }
 body { margin: 0; }
 button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 button { touch-action: manipulation; }
-::selection { background: #C7F464; color: #1F1F1F; }
+::selection { background: var(--tw-color-lime); color: var(--tw-color-ink); }
 .playbook { min-height: 100vh; background: var(--tw-color-bg); color: var(--tw-color-text); }
 .pb-small { color: var(--tw-color-muted); font-size: 13px; line-height: 1.65; }
 .pb-eyebrow { color: var(--tw-color-muted); font: 400 12px/1.6 var(--tw-font-mono); }
@@ -11,7 +11,7 @@ button { touch-action: manipulation; }
 .pb-sidebar { position: fixed; inset: 0 auto 0 0; display: flex; flex-direction: column; width: 220px; padding: 32px 24px 20px; border-right: 1px solid var(--tw-color-line); background: var(--tw-color-bg); z-index: var(--tw-layer-sticky); overflow-y: auto; }
 .pb-sidebar-brand { display: flex; align-items: center; justify-content: space-between; }
 .pb-sidebar-brand > a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
-.pb-sidebar-brand .pb-tweeds-logo { width: 172px; }
+.pb-sidebar-brand .pb-tweeds-logo { width: 132px; }
 .pb-sidebar nav { display: grid; gap: 4px; margin: 32px -12px 24px; }
 .pb-sidebar nav a { display: flex; align-items: center; min-height: 44px; padding: 10px 12px; border-radius: var(--tw-radius-sm); color: var(--tw-color-text); font-size: 14px; text-decoration: none; }
 .pb-sidebar nav a:hover { background: var(--tw-color-surface); }
@@ -158,7 +158,7 @@ html[data-pb-transition='theme']::view-transition-new(root) { animation: pb-ink-
 .pb-motion-demo { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
 .pb-motion-track { --pb-motion-dot-size: 22px; position: relative; width: 240px; max-width: 100%; height: 44px; }
 .pb-motion-track::before { content: ''; position: absolute; top: 50%; width: 100%; height: 1px; background: var(--tw-color-border); }
-.pb-motion-track span { position: absolute; top: calc(50% - var(--pb-motion-dot-size) / 2); left: 0; width: var(--pb-motion-dot-size); height: var(--pb-motion-dot-size); border: 1px solid var(--tw-color-charcoal); border-radius: 50%; background: var(--tw-color-discovery); transition: left var(--tw-motion-base) var(--tw-motion-ease); }
+.pb-motion-track span { position: absolute; top: calc(50% - var(--pb-motion-dot-size) / 2); left: 0; width: var(--pb-motion-dot-size); height: var(--pb-motion-dot-size); border: 1px solid var(--tw-color-ink); border-radius: 50%; background: var(--tw-color-discovery); transition: left var(--tw-motion-base) var(--tw-motion-ease); }
 .pb-motion-track[data-state='B'] span { left: calc(100% - var(--pb-motion-dot-size)); }
 .pb-token-reference { border-block: 1px solid var(--tw-color-line); }
 .pb-token-reference summary { display: flex; align-items: center; min-height: 52px; width: fit-content; font-size: 15px; cursor: pointer; }
@@ -201,7 +201,7 @@ html[data-pb-transition='theme']::view-transition-new(root) { animation: pb-ink-
 @media (max-width: 760px) {
   .pb-shell { --pb-gutter: 20px; --pb-main-top: 32px; }
   .pb-sidebar { position: relative; display: block; width: 100%; padding: 20px; border-right: 0; border-bottom: 1px solid var(--tw-color-line); overflow: visible; }
-  .pb-sidebar-brand .pb-tweeds-logo { width: 160px; }
+  .pb-sidebar-brand .pb-tweeds-logo { width: 122px; }
   .pb-mobile-menu { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; padding: 10px; border: 1px solid var(--tw-color-border); color: var(--tw-color-text); background: transparent; cursor: pointer; }
   .pb-sidebar-footer { display: none; }
   .pb-sidebar nav { display: none; margin: 20px 0 0; padding-top: 12px; border-top: 1px solid var(--tw-color-line); }

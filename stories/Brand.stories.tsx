@@ -5,7 +5,7 @@ const meta = {
   title: 'Brand/Logo', component: Logo,
   args: { variant: 'stacked' },
   argTypes: { variant: { control: 'inline-radio', options: ['stacked', 'compact', 'monogram'] } },
-  parameters: { docs: { description: { component: 'The main mark sets Tinker above Works in DM Serif Display at regular weight 400. This face gives the wordmark fuller drawn strokes while Instrument Serif remains the editorial typeface. Keep natural letter widths, aligned left edges, and a visible gap between the lines. Use the included font and leave open space around the mark. Supporting copy stays outside it. Use the TW monogram where the full wordmark would crowd a small surface; every variant keeps the accessible name Tinker Works. Use charcoal on cream or cream on charcoal. When the logo links home, name the enclosing link “Tinker Works home”.' } } },
+  parameters: { docs: { description: { component: 'The main mark sets Tinker above Works in Instrument Serif at regular weight 400, the same face as editorial headings. Keep natural letter widths, aligned left edges, and a visible gap between the lines. Use the included font and leave open space around the mark. Supporting copy stays outside it. Use the TW monogram where the full wordmark would crowd a small surface; every variant keeps the accessible name Tinker Works. Use paper on ink or ink on paper. When the logo links home, name the enclosing link “Tinker Works home”.' } } },
 } satisfies Meta<typeof Logo>;
 export default meta;
 type Story = StoryObj<typeof meta>;

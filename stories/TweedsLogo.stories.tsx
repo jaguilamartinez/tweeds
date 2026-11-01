@@ -10,7 +10,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Tweeds identifies the Tinker Works Design System playbook. Its wordmark uses DM Serif Display, with “Tinker Works Design System” beneath it in the full lockup. This is a private playbook component in example/, separate from the public Tinker Works Logo used in applications. Keep its natural letter proportions and use the supplied descriptor rather than adding other copy inside the mark.',
+        component: 'Tweeds identifies the Tinker Works Design System playbook. Its wordmark uses Instrument Serif, with “Tinker Works Design System” beneath it in the full lockup. This is a private playbook component in example/, separate from the public Tinker Works Logo used in applications. Keep its natural letter proportions and use the supplied descriptor rather than adding other copy inside the mark.',
       },
     },
   },

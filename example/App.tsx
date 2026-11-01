@@ -65,7 +65,7 @@ function ReferencePage({ page }: { page: Exclude<Page, 'overview'> }) {
 
 export default function App() {
   const [page, setPage] = useState<Page>(currentPage);
-  const [theme, setTheme] = useState<Theme>('paper');
+  const [theme, setTheme] = useState<Theme>('ink');
   const [menuOpen, setMenuOpen] = useState(false);
   const main = useRef<HTMLElement>(null);
   const shell = useRef<HTMLDivElement>(null);

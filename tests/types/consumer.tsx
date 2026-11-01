@@ -32,7 +32,7 @@ export function DraftedDrawing() {
 }
 
 export const tokenValues: string[] = [
-  rootTokens.primitive.color.charcoal,
+  rootTokens.primitive.color.ink,
   tokens.primitive.font.logo,
   primitiveTokens.space.md,
   semanticTokens[theme].color.focus,

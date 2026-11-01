@@ -98,25 +98,25 @@ test('supports keyboard section navigation, direct links, and theme changes', as
   await expect(page).toHaveURL(/#foundations$/);
   await expect(page.getByRole('main')).toBeVisible();
   await expect(page.getByRole('region', { name: 'Logo', exact: true }).getByRole('img', { name: 'Tinker Works', exact: true })).toHaveCount(2);
-  const theme = page.getByRole('button', { name: 'Switch to ink theme', exact: true });
+  const theme = page.getByRole('button', { name: 'Switch to paper theme', exact: true });
   await theme.focus();
   await page.keyboard.press('Enter');
-  await expect(page.getByRole('button', { name: 'Switch to paper theme', exact: true })).toBeVisible();
-  await page.keyboard.press('Enter');
   await expect(page.getByRole('button', { name: 'Switch to ink theme', exact: true })).toBeVisible();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Switch to paper theme', exact: true })).toBeVisible();
 });
 
 test('preserves the brand typography and colored component signals in both themes', async ({ page }) => {
   await page.goto('/#components');
   const index = page.getByRole('navigation', { name: 'Component list', exact: true });
-  for (const theme of ['paper', 'ink']) {
-    if (theme === 'ink') await page.getByRole('button', { name: 'Switch to ink theme', exact: true }).click();
+  for (const theme of ['ink', 'paper']) {
+    if (theme === 'paper') await page.getByRole('button', { name: 'Switch to paper theme', exact: true }).click();
     await index.getByRole('button', { name: 'Logo', exact: true }).click();
     const logos = page.getByRole('article', { name: 'Logo', exact: true }).getByRole('img', { name: 'Tinker Works', exact: true });
     await expect(logos).toHaveCount(3);
     const font = await page.evaluate(async () => {
-      const faces = await document.fonts.load('400 112px "DM Serif Display"', 'Tinker Works');
-      return { loaded: faces.filter(face => face.status === 'loaded').length, available: document.fonts.check('400 112px "DM Serif Display"') };
+      const faces = await document.fonts.load('400 112px "Instrument Serif"', 'Tinker Works');
+      return { loaded: faces.filter(face => face.status === 'loaded').length, available: document.fonts.check('400 112px "Instrument Serif"') };
     });
     expect(font.loaded, 'The bundled logo face loads instead of relying on a fallback').toBeGreaterThan(0);
     expect(font.available).toBe(true);
@@ -127,7 +127,7 @@ test('preserves the brand typography and colored component signals in both theme
     for (const mark of logoTreatment) {
       expect(mark.every(element => element.stroke === 'none'), 'Logo glyphs render without an outline').toBe(true);
       expect(mark.every(element => element.fontSynthesis === 'none'), 'Logo glyphs use the supplied face without synthetic weight').toBe(true);
-      expect(mark.every(element => element.fontFamily.includes('DM Serif Display')), 'Every logo variant uses the heavier logo face').toBe(true);
+      expect(mark.every(element => element.fontFamily.includes('Instrument Serif')), 'Every logo variant uses the shared serif face').toBe(true);
     }
     const wordSpacing = await logos.evaluateAll(marks => {
       const context = document.createElement('canvas').getContext('2d')!;
@@ -157,7 +157,7 @@ test('preserves the brand typography and colored component signals in both theme
     const orangeTag = tags.getByText('Needs attention', { exact: true });
     await expect(limeTag).toHaveCSS('background-color', 'rgb(199, 244, 100)');
     await expect(orangeTag).toHaveCSS('background-color', 'rgb(255, 90, 0)');
-    for (const tag of [limeTag, orangeTag]) await expect(tag).toHaveCSS('color', 'rgb(31, 31, 31)');
+    for (const tag of [limeTag, orangeTag]) await expect(tag).toHaveCSS('color', 'rgb(19, 21, 26)');
     const progress = tags.getByText('In progress', { exact: true });
     await expect(progress.locator('.tw-tag__status')).toHaveCSS('background-color', 'rgb(199, 244, 100)');
     await expect(progress).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
@@ -396,8 +396,8 @@ for (const section of ['overview', 'foundations', 'components', 'patterns', 'exa
     await page.goto(`/#${section}`);
     if (section === 'example') await page.getByRole('region', { name: 'Common Thread example application' }).getByRole('button', { name: 'Workspace', exact: true }).click();
     await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') });
-    for (const theme of ['paper', 'ink']) {
-      if (theme === 'ink') await page.getByRole('button', { name: 'Switch to ink theme', exact: true }).click();
+    for (const theme of ['ink', 'paper']) {
+      if (theme === 'paper') await page.getByRole('button', { name: 'Switch to paper theme', exact: true }).click();
       await expect(page.locator('.playbook')).toHaveAttribute('data-tw-theme', theme);
       // Axe samples rendered pixels. Let the committed theme and local fonts
       // paint before comparing foreground and background colors.

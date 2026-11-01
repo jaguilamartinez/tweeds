@@ -10,23 +10,24 @@
 .tw-theme :where(h1, h2, h3, p, figure) { margin: 0; }
 .tw-theme :where(a) { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
-  .tw-theme *, .tw-theme *::before, .tw-theme *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  /* Remove transitions rather than shorten them: a near-zero duration still makes every property, color included, transition for a frame. */
+  .tw-theme *, .tw-theme *::before, .tw-theme *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition: none !important; }
 }
 @media print {
   [data-tw-theme] {
-    --tw-color-bg: var(--tw-color-cream);
+    --tw-color-bg: var(--tw-color-paper);
     --tw-color-surface: var(--tw-color-paper-white);
-    --tw-color-text: var(--tw-color-charcoal);
+    --tw-color-text: var(--tw-color-ink);
     --tw-color-muted: var(--tw-color-paper-muted);
     --tw-color-border: var(--tw-color-paper-border);
     --tw-color-line: var(--tw-color-paper-line);
-    --tw-color-action: var(--tw-color-charcoal);
-    --tw-color-action-text: var(--tw-color-cream);
+    --tw-color-action: var(--tw-color-ink);
+    --tw-color-action-text: var(--tw-color-paper);
     --tw-color-accent: var(--tw-color-signal-orange);
     --tw-color-discovery: var(--tw-color-lime);
-    --tw-color-focus: var(--tw-color-charcoal);
-    --tw-color-error: var(--tw-color-charcoal);
-    --tw-color-error-border: var(--tw-color-charcoal);
+    --tw-color-focus: var(--tw-color-ink);
+    --tw-color-error: var(--tw-color-ink);
+    --tw-color-error-border: var(--tw-color-ink);
     color-scheme: light;
     print-color-adjust: exact;
   }

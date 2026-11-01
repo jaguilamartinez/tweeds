@@ -12,7 +12,7 @@ const typefaces = [
   { name: family(primitiveTokens.font.mono), className: 'pb-title-block__mono' },
 ];
 const proportions = Object.entries(brandTokens.colorUsage) as [keyof typeof brandTokens.colorUsage, string][];
-const colorNames: Record<keyof typeof brandTokens.colorUsage, string> = { cream: 'cream', charcoal: 'charcoal', stone: 'stone', signalOrange: 'signal orange', lime: 'lime' };
+const colorNames: Record<keyof typeof brandTokens.colorUsage, string> = { ink: 'ink', paper: 'paper', graphite: 'graphite', signalOrange: 'signal orange', lime: 'lime' };
 const corners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const;
 const at = (milliseconds: number) => ({ '--tw-reveal-at': `${milliseconds}ms` }) as CSSProperties;
 const typed = (label: string, milliseconds: number) => ({ ...at(milliseconds), '--tw-type-steps': label.length }) as CSSProperties;
@@ -46,7 +46,7 @@ function TitleBlock() {
       </div>
       <div className="pb-title-block__cell">
         <dt className="pb-title-block__label tw-type" style={typed('Themes', 1740)}>Themes</dt>
-        <dd className="pb-title-block__themes"><span className="pb-theme-chip pb-theme-chip--paper">Paper</span><span className="pb-theme-chip pb-theme-chip--ink">Ink</span></dd>
+        <dd className="pb-title-block__themes"><span className="pb-theme-chip pb-theme-chip--ink">Ink</span><span className="pb-theme-chip pb-theme-chip--paper">Paper</span></dd>
       </div>
     </dl>
   </div>;

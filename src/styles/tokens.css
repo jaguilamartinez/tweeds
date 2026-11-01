@@ -1,21 +1,21 @@
 /* Generated from src/tokens.json. Run pnpm tokens:build. */
 :root, [data-tw-theme] {
-  --tw-color-cream: #F7F3EA;
-  --tw-color-charcoal: #1F1F1F;
-  --tw-color-stone: #9A9A92;
+  --tw-color-ink: #13151A;
+  --tw-color-paper: #FAF8F3;
+  --tw-color-graphite: #999998;
   --tw-color-signal-orange: #FF5A00;
   --tw-color-lime: #C7F464;
-  --tw-color-paper-white: #FFFCF5;
-  --tw-color-paper-muted: #606159;
-  --tw-color-paper-border: #77786E;
-  --tw-color-paper-line: #D8D5CC;
-  --tw-color-ink-surface: #292A26;
-  --tw-color-ink-muted: #BDBDB0;
-  --tw-color-ink-border: #8C8D80;
-  --tw-color-ink-line: #494A42;
-  --tw-font-logo: 'DM Serif Display', Georgia, serif;
+  --tw-color-ink-surface: #202126;
+  --tw-color-ink-muted: #A7A6A5;
+  --tw-color-ink-border: #7B7B7C;
+  --tw-color-ink-line: #38393D;
+  --tw-color-paper-white: #FFFFFF;
+  --tw-color-paper-muted: #666768;
+  --tw-color-paper-border: #797979;
+  --tw-color-paper-line: #DCDAD7;
+  --tw-font-logo: 'Instrument Serif', Georgia, serif;
   --tw-font-display: 'Instrument Serif', Georgia, serif;
-  --tw-font-ui: 'Space Grotesk', Arial, sans-serif;
+  --tw-font-ui: 'Instrument Sans', Arial, sans-serif;
   --tw-font-mono: 'IBM Plex Mono', monospace;
   --tw-font-size-caption: 0.75rem;
   --tw-font-size-small: 0.875rem;
@@ -66,41 +66,41 @@
   --tw-layer-overlay: 100;
   --tw-layer-notification: 200;
 }
-:root, [data-tw-theme="paper"] {
-  --tw-color-bg: #F7F3EA;
-  --tw-color-surface: #FFFCF5;
-  --tw-color-text: #1F1F1F;
-  --tw-color-muted: #606159;
-  --tw-color-border: #77786E;
-  --tw-color-line: #D8D5CC;
-  --tw-color-action: #1F1F1F;
-  --tw-color-action-text: #F7F3EA;
-  --tw-color-accent: #FF5A00;
-  --tw-color-discovery: #C7F464;
-  --tw-color-focus: #1F1F1F;
-  --tw-color-error: #1F1F1F;
-  --tw-color-error-border: #1F1F1F;
-}
-[data-tw-theme="ink"] {
-  --tw-color-bg: #1F1F1F;
-  --tw-color-surface: #292A26;
-  --tw-color-text: #F7F3EA;
-  --tw-color-muted: #BDBDB0;
-  --tw-color-border: #8C8D80;
-  --tw-color-line: #494A42;
-  --tw-color-action: #F7F3EA;
-  --tw-color-action-text: #1F1F1F;
+:root, [data-tw-theme="ink"] {
+  --tw-color-bg: #13151A;
+  --tw-color-surface: #202126;
+  --tw-color-text: #FAF8F3;
+  --tw-color-muted: #A7A6A5;
+  --tw-color-border: #7B7B7C;
+  --tw-color-line: #38393D;
+  --tw-color-action: #FAF8F3;
+  --tw-color-action-text: #13151A;
   --tw-color-accent: #FF5A00;
   --tw-color-discovery: #C7F464;
   --tw-color-focus: #C7F464;
-  --tw-color-error: #F7F3EA;
-  --tw-color-error-border: #F7F3EA;
+  --tw-color-error: #FAF8F3;
+  --tw-color-error-border: #FAF8F3;
+}
+[data-tw-theme="paper"] {
+  --tw-color-bg: #FAF8F3;
+  --tw-color-surface: #FFFFFF;
+  --tw-color-text: #13151A;
+  --tw-color-muted: #666768;
+  --tw-color-border: #797979;
+  --tw-color-line: #DCDAD7;
+  --tw-color-action: #13151A;
+  --tw-color-action-text: #FAF8F3;
+  --tw-color-accent: #FF5A00;
+  --tw-color-discovery: #C7F464;
+  --tw-color-focus: #13151A;
+  --tw-color-error: #13151A;
+  --tw-color-error-border: #13151A;
 }
 :root, [data-tw-theme] {
   --tw-icon-stroke: 1;
   --tw-icon-construction-ratio: 0.55;
   --tw-logo-font-weight: 400;
-  --tw-logo-letter-spacing: -0.018em;
+  --tw-logo-letter-spacing: -0.01em;
   --tw-highlight-overlay-orange-opacity: 0.48;
   --tw-highlight-overlay-lime-opacity: 0.32;
   --tw-button-height-sm: 44px;
@@ -116,11 +116,11 @@
   --tw-navigation-height: 112px;
 }
 :root, [data-tw-theme] {
-  --tw-brand-color-usage-cream: 60%;
-  --tw-brand-color-usage-charcoal: 20%;
-  --tw-brand-color-usage-stone: 10%;
+  --tw-brand-color-usage-ink: 60%;
+  --tw-brand-color-usage-paper: 20%;
+  --tw-brand-color-usage-graphite: 10%;
   --tw-brand-color-usage-signal-orange: 5%;
   --tw-brand-color-usage-lime: 5%;
 }
+:root, [data-tw-theme="ink"] { color-scheme: dark; }
 [data-tw-theme="paper"] { color-scheme: light; }
-[data-tw-theme="ink"] { color-scheme: dark; }

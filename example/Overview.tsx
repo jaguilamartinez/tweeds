@@ -8,7 +8,7 @@ const topics = [
 ] as const;
 
 /** The library band uses the opposite theme to the page, so the page changes pace partway down. */
-export default function Overview({ theme = 'paper' }: { theme?: Theme }) {
+export default function Overview({ theme = 'ink' }: { theme?: Theme }) {
   const closing = useReveal<HTMLElement>({ threshold: 0.6 });
   return <>
     <OverviewSheet action={{ label: 'Browse components', href: '#components' }} />
@@ -32,7 +32,7 @@ export default function Overview({ theme = 'paper' }: { theme?: Theme }) {
 import '@tinker-works/ui/styles.css';
 import '@tinker-works/ui/fonts.css';
 
-<ThemeProvider theme="paper">
+<ThemeProvider theme="ink">
   <Button>Save changes</Button>
 </ThemeProvider>`}</code></pre>
       </ThemeProvider>

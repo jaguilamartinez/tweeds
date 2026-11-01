@@ -14,17 +14,17 @@ const preview: Preview = {
         title: 'Theme',
         icon: 'circlehollow',
         items: [
-          { value: 'paper', title: 'Paper / warm cream' },
-          { value: 'ink', title: 'Ink / charcoal' },
+          { value: 'ink', title: 'Ink / blue-black' },
+          { value: 'paper', title: 'Paper / soft white' },
         ],
         dynamicTitle: true,
       },
     },
   },
-  initialGlobals: { theme: 'paper' },
+  initialGlobals: { theme: 'ink' },
   decorators: [
     (Story, context) => (
-      <ThemeProvider theme={context.globals.theme === 'ink' ? 'ink' : 'paper'}>
+      <ThemeProvider theme={context.globals.theme === 'paper' ? 'paper' : 'ink'}>
         <div className="tw-story-stage"><Story /></div>
       </ThemeProvider>
     ),

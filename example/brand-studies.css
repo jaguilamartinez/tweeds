@@ -5,7 +5,7 @@
 .pb-color-ratio__labels dt { color: var(--tw-color-muted); font: 400 13px/1.5 var(--tw-font-ui); }
 .pb-color-ratio__labels dd { margin: 5px 0 0; color: var(--tw-color-text); font: 400 12px/1.5 var(--tw-font-mono); }
 @container (min-width: 800px) {
-  .pb-color-ratio__labels { grid-template-columns: var(--tw-brand-color-usage-cream) var(--tw-brand-color-usage-charcoal) var(--tw-brand-color-usage-stone) var(--tw-brand-color-usage-signal-orange) var(--tw-brand-color-usage-lime); gap: 0; }
+  .pb-color-ratio__labels { grid-template-columns: var(--tw-brand-color-usage-ink) var(--tw-brand-color-usage-paper) var(--tw-brand-color-usage-graphite) var(--tw-brand-color-usage-signal-orange) var(--tw-brand-color-usage-lime); gap: 0; }
   .pb-color-ratio__labels dt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
 .pb-overlay-study { max-width: 720px; margin: 0; }

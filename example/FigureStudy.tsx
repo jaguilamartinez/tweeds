@@ -27,7 +27,7 @@ export function FigureStudy({ drafted = true }: { drafted?: boolean }) {
         <path d="M77 69.5 182 70.4 248 72M248 78 247.6 279 192 283" opacity=".5" strokeWidth=".7" />
         <path d="M80 103H246M96 88H132M210 88H231M96 124H178M96 141H215M96 158H203" />
         <path d="M92 181 232 179.6 234 216 93 217.4Z" fill="var(--tw-color-discovery)" fillOpacity=".75" stroke="none" />
-        <path d="M96 190H181M96 204H161" stroke="var(--tw-color-charcoal)" />
+        <path d="M96 190H181M96 204H161" stroke="var(--tw-color-ink)" />
         <path d="M96 240H215M96 254H189" />
         <path d="M100 270 109 279M109 270 118 279M118 270 127 279" opacity=".6" strokeWidth=".8" />
 
