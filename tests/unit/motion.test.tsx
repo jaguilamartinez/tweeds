@@ -1,6 +1,6 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ThemeProvider, useReveal } from '../../src';
+import { Button, Icon, Tabs, ThemeProvider, useReveal } from '../../src';
 
 let observers: { callback: IntersectionObserverCallback; disconnect: ReturnType<typeof vi.fn> }[] = [];
 
@@ -84,5 +84,50 @@ describe('drafting motion without browser support', () => {
   it('shows the still drawing when the browser cannot observe visibility', () => {
     render(<Drawing />);
     expect(screen.getByRole('img', { name: 'Study' })).not.toHaveAttribute('data-tw-reveal');
+  });
+});
+
+describe('component motion', () => {
+  const items = [
+    { id: 'overview', label: 'Overview', content: <p>Summary</p> },
+    { id: 'details', label: 'Details', content: <p>Details</p> },
+  ];
+  afterEach(() => { vi.useRealTimers(); });
+
+  it('moves the tab underline from the previous tab, then leaves it on the selected tab', () => {
+    vi.useFakeTimers();
+    render(<Tabs items={items} />);
+    const list = screen.getByRole('tablist');
+    expect(list).not.toHaveAttribute('data-sliding');
+    fireEvent.click(screen.getByRole('tab', { name: 'Details' }));
+    expect(list).toHaveAttribute('data-sliding', 'true');
+    expect(list.querySelector('.tw-tabs__indicator')).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.getAllByRole('tab')).toHaveLength(2);
+    act(() => { vi.advanceTimersByTime(600); });
+    expect(list).not.toHaveAttribute('data-sliding');
+    expect(list.querySelector('.tw-tabs__indicator')).toBeNull();
+    expect(screen.getByRole('tab', { name: 'Details' })).toHaveAttribute('aria-selected', 'true');
+  });
+
+  it('changes tabs without the journey when reduced motion is requested', () => {
+    vi.spyOn(window, 'matchMedia').mockImplementation(query => ({ matches: query.includes('reduce'), media: query } as MediaQueryList));
+    render(<Tabs items={items} />);
+    fireEvent.click(screen.getByRole('tab', { name: 'Details' }));
+    expect(screen.getByRole('tablist')).not.toHaveAttribute('data-sliding');
+    expect(screen.getByRole('tab', { name: 'Details' })).toHaveAttribute('aria-selected', 'true');
+  });
+
+  it('names icon drawings and their construction layer for interaction styles', () => {
+    const { container } = render(<><Icon name="arrow-right" /><Icon name="crosshair" size={32} /></>);
+    const [arrow, crosshair] = container.querySelectorAll('svg');
+    expect(arrow).toHaveAttribute('data-tw-icon', 'arrow-right');
+    expect(crosshair.querySelector('.tw-icon__construction')).toBeInTheDocument();
+  });
+
+  it('keeps the loading indicator out of the button name', () => {
+    render(<Button loading>Saving changes</Button>);
+    const button = screen.getByRole('button', { name: 'Saving changes' });
+    expect(button).toBeDisabled();
+    expect(button.querySelector('svg.tw-spinner')).toHaveAttribute('aria-hidden', 'true');
   });
 });

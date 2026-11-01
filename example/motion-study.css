@@ -1,0 +1,42 @@
+.pb-motion-study { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; max-width: 960px; }
+.pb-motion-study figure, .pb-easing-study figure { min-width: 0; margin: 0; padding-top: 16px; border-top: 1px solid var(--tw-color-line); }
+.pb-motion-study svg, .pb-easing-study svg { display: block; width: 100%; max-width: 280px; height: auto; margin: 0 auto 16px; color: var(--tw-color-text); overflow: visible; }
+.pb-motion-study :where(path, circle), .pb-easing-study :where(path, circle) { vector-effect: non-scaling-stroke; }
+.pb-motion-study text, .pb-easing-study text { fill: var(--tw-color-text); stroke: none; font: 400 13px var(--tw-font-mono); letter-spacing: .04em; }
+.pb-motion-study figcaption h3, .pb-easing-study figcaption h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 0 0 8px; font: 500 16px/1.4 var(--tw-font-ui); }
+.pb-motion-study figcaption code, .pb-easing-study figcaption code { color: var(--tw-color-muted); font: 400 12px/1.5 var(--tw-font-mono); }
+.pb-easing-study figcaption h3 code { color: var(--tw-color-text); font-size: 13px; }
+.pb-motion-study figcaption p, .pb-easing-study figcaption p { margin: 0; color: var(--tw-color-muted); font: 400 14px/1.65 var(--tw-font-ui); }
+.pb-motion-study .pb-motion-replay { margin-top: 4px; }
+.pb-motion-study__guide { stroke: var(--tw-color-border); stroke-width: .65; opacity: .55; }
+.pb-motion-study__axis { stroke: var(--tw-color-border); stroke-width: .75; stroke-dasharray: 10 4 2 4; }
+.pb-motion-study__accent { stroke: var(--tw-color-accent); stroke-width: 1.6; }
+.pb-motion-study__point { fill: var(--tw-color-accent); stroke: var(--tw-color-text); }
+.pb-motion-study__note { fill: var(--tw-color-muted); }
+.pb-motion-study__wash { stroke: none; }
+.pb-motion-study__wash--lime { fill: var(--tw-color-discovery); fill-opacity: var(--tw-highlight-overlay-lime-opacity); }
+.pb-motion-study__wash--orange { fill: var(--tw-color-accent); fill-opacity: var(--tw-highlight-overlay-orange-opacity); }
+.pb-motion-study__plate path { fill: var(--tw-color-bg); }
+.pb-motion-study__plate--1 { transform: translateY(-22px); }
+.pb-motion-study__plate--2 { transform: translateY(-44px); }
+.pb-motion-study__plate .pb-motion-study__plate-mark { fill: var(--tw-color-discovery); stroke: none; }
+
+/* Plot: the point moves across at a constant rate and up at the plotted easing, so it traces the curve. */
+.pb-easing-study { --pb-plot-duration: 1400ms; max-width: 960px; }
+.pb-easing-study__curves { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; }
+.pb-easing-study .pb-motion-replay { margin-top: 20px; }
+.pb-motion-study__curve { stroke-width: 1.4; }
+.pb-motion-study__value { stroke: var(--tw-color-accent); stroke-width: 2; }
+.pb-plot-x { transform: translateX(180px); }
+.pb-plot-y { transform: translateY(-100px); }
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .pb-plot-x { animation: pb-plot var(--pb-plot-duration) linear 200ms backwards; }
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .pb-plot-y { animation: pb-plot var(--pb-plot-duration) var(--pb-plot-easing) 200ms backwards; }
+[data-tw-reveal='pending'] :is(.pb-plot-x, .pb-plot-y) { animation-play-state: paused; }
+@keyframes pb-plot { from { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) { .pb-motion-replay { display: none; } }
+[data-tw-motion='off'] .pb-motion-replay { display: none; }
+@media (max-width: 900px) { .pb-easing-study__curves { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .pb-motion-study { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; } }
+@media (max-width: 420px) { .pb-motion-study, .pb-easing-study__curves { grid-template-columns: 1fr; } }
+@media print { .pb-motion-replay { display: none; } .pb-motion-study figure, .pb-easing-study figure { break-inside: avoid; } }

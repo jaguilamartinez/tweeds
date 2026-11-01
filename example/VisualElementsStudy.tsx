@@ -1,4 +1,5 @@
-import { useId, type ReactNode } from 'react';
+import { useId, type CSSProperties, type ReactNode } from 'react';
+import { useReveal } from '@tinker-works/ui';
 import './visual-elements.css';
 
 function Crosshair({ x, y, radius = 8 }: { x: number; y: number; radius?: number }) {
@@ -69,8 +70,8 @@ const studies: { name: string; description: string; drawing: ReactNode }[] = [
     description: 'Mark an area while keeping its drawing visible.',
     drawing: <>
       <path d="M52 34h117v89H52ZM72 49h117v89H72Z" className="pb-visual-elements__guide" />
-      <path d="m47 52 78-2 2 45-78 1Z" className="pb-visual-elements__wash pb-visual-elements__wash--lime" />
-      <path d="m130 83 64-1 1 39-65 2Z" className="pb-visual-elements__wash pb-visual-elements__wash--orange" />
+      <path d="m47 52 78-2 2 45-78 1Z" className="pb-visual-elements__wash pb-visual-elements__wash--lime tw-mark" style={{ '--tw-reveal-at': '500ms' } as CSSProperties} />
+      <path d="m130 83 64-1 1 39-65 2Z" className="pb-visual-elements__wash pb-visual-elements__wash--orange tw-mark" style={{ '--tw-reveal-at': '800ms' } as CSSProperties} />
       <path d="M52 34h117v89H52ZM52 57h117M64 46h39M64 73h76M64 86h51M64 109h38M154 73h35v65h-35" />
       <Crosshair x={52} y={34} radius={5} />
     </>,
@@ -79,10 +80,11 @@ const studies: { name: string; description: string; drawing: ReactNode }[] = [
 
 function Drawing({ name, children }: { name: string; children: ReactNode }) {
   const titleId = useId();
+  const reveal = useReveal<SVGSVGElement>({ threshold: 0.6 });
   return (
-    <svg viewBox="0 0 240 152" role="img" aria-labelledby={titleId} focusable="false">
+    <svg ref={reveal.ref} viewBox="0 0 240 152" role="img" aria-labelledby={titleId} focusable="false">
       <title id={titleId}>{name}</title>
-      <g fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">{children}</g>
+      <g className="tw-draft" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="butt" strokeLinejoin="miter">{children}</g>
     </svg>
   );
 }

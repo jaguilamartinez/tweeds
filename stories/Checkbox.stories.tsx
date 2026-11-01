@@ -4,7 +4,7 @@ import { Checkbox } from '../src/index';
 const meta = {
   title: 'Components/Checkbox', component: Checkbox,
   args: { label: 'Send me a copy', disabled: false },
-  parameters: { docs: { description: { component: 'A native checkbox supports binary selections, Space activation, forms, and a clickable visible label. Use defaultChecked for an uncontrolled field or checked with onChange for controlled state. Group related checkboxes inside a fieldset with a legend. Use Switch when a setting takes effect immediately.' } } },
+  parameters: { docs: { description: { component: 'A native checkbox supports binary selections; its tick is drawn when checked. It supports Space activation, forms, and a clickable visible label. Use defaultChecked for an uncontrolled field or checked with onChange for controlled state. Group related checkboxes inside a fieldset with a legend. Use Switch when a setting takes effect immediately.' } } },
 } satisfies Meta<typeof Checkbox>;
 export default meta;
 type Story = StoryObj<typeof meta>;

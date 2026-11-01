@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react';
+import { primitiveTokens } from '../tokens.js';
 
 export interface TabItem {
   id: string;
@@ -14,10 +15,16 @@ export interface TabsProps {
   label?: string;
 }
 
+interface Slide { key: number; style: CSSProperties }
+const slideDuration = parseInt(primitiveTokens.motion.mechanism, 10);
+
 export function Tabs({ items, defaultValue, value, onValueChange, label = 'Sections' }: TabsProps) {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue ?? items[0]?.id);
   const baseId = useId();
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
+  const list = useRef<HTMLDivElement>(null);
+  const shown = useRef<string | undefined>(undefined);
+  const [slide, setSlide] = useState<Slide | null>(null);
   const requestedValue = value ?? uncontrolledValue;
   const selected = items.find(item => item.id === requestedValue)?.id ?? items[0]?.id;
 
@@ -28,6 +35,28 @@ export function Tabs({ items, defaultValue, value, onValueChange, label = 'Secti
       setUncontrolledValue(selected);
     }
   }, [value, selected, uncontrolledValue]);
+
+  // The orange underline travels from the previous tab to the new one, then the tab keeps it.
+  useLayoutEffect(() => {
+    const previous = shown.current;
+    shown.current = selected;
+    const element = list.current;
+    if (previous === undefined || previous === selected || !element) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || element.closest('[data-tw-motion="off"]')) return;
+    const from = refs.current[items.findIndex(item => item.id === previous)];
+    const to = refs.current[items.findIndex(item => item.id === selected)];
+    if (!from || !to) return;
+    setSlide({ key: Date.now(), style: {
+      '--tw-tab-from-x': `${from.offsetLeft}px`, '--tw-tab-from-w': `${from.offsetWidth}px`,
+      '--tw-tab-x': `${to.offsetLeft}px`, '--tw-tab-w': `${to.offsetWidth}px`,
+    } as CSSProperties });
+  }, [items, selected]);
+
+  useEffect(() => {
+    if (!slide) return;
+    const timer = window.setTimeout(() => setSlide(null), slideDuration);
+    return () => window.clearTimeout(timer);
+  }, [slide]);
 
   function select(id: string) {
     if (value === undefined) setUncontrolledValue(id);
@@ -56,7 +85,7 @@ export function Tabs({ items, defaultValue, value, onValueChange, label = 'Secti
 
   return (
     <div className="tw-tabs">
-      <div className="tw-tabs__list" role="tablist" aria-label={label}>
+      <div ref={list} className="tw-tabs__list" role="tablist" aria-label={label} data-sliding={slide ? true : undefined}>
         {items.map((item, index) => {
           const id = itemId(item.id);
           return (
@@ -77,6 +106,7 @@ export function Tabs({ items, defaultValue, value, onValueChange, label = 'Secti
             </button>
           );
         })}
+        {slide && <span key={slide.key} className="tw-tabs__indicator" style={slide.style} aria-hidden="true" />}
       </div>
       {items.map(item => {
         const id = itemId(item.id);

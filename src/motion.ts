@@ -64,9 +64,10 @@ function prepareStrokes(root: Element) {
   }
 }
 
+/** Finite CSS animations in the root: the verbs and any sequence a page adds beside them. */
 function verbAnimations(root: Element) {
   return root.getAnimations({ subtree: true })
-    .filter(animation => typeof CSSAnimation === 'function' && animation instanceof CSSAnimation && animation.animationName.startsWith('tw-'));
+    .filter(animation => typeof CSSAnimation === 'function' && animation instanceof CSSAnimation && animation.effect?.getTiming().iterations !== Infinity);
 }
 
 /**

@@ -11,7 +11,7 @@ const meta = {
     icon: { control: false },
     onClick: { action: 'clicked' },
   },
-  parameters: { docs: { description: { component: 'Compact rectangular controls use regular Space Grotesk labels and restrained 2px corners. Primary is charcoal on paper; secondary keeps a thin outlined boundary; tertiary stays open. Reserve signal orange for a consequential action. A horizontal arrow is optional and should indicate progression. Use a TextLink for navigation, and use a native button for an action. Even the small size retains a 44px minimum touch target. Keyboard activation, visible focus, disabled, and loading states are included. Loading preserves the label and prevents repeat activation; announce completion in the surrounding interface.' } } },
+  parameters: { docs: { description: { component: 'Compact rectangular controls use regular Space Grotesk labels and restrained 2px corners. Primary is charcoal on paper; secondary keeps a thin outlined boundary; tertiary stays open. Reserve signal orange for a consequential action. A horizontal arrow is optional and should indicate progression. On hover, a second sheet slides out behind the button and pressing moves the button onto it; focus adds registration corners around the outline. Loading shows a ticking asterisk. Use a TextLink for navigation, and use a native button for an action. Even the small size retains a 44px minimum touch target. Keyboard activation, visible focus, disabled, and loading states are included. Loading preserves the label and prevents repeat activation; announce completion in the surrounding interface.' } } },
 } satisfies Meta<typeof Button>;
 export default meta;
 type Story = StoryObj<typeof meta>;

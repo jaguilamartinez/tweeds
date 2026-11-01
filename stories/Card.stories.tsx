@@ -5,7 +5,7 @@ const meta = {
   title: 'Components/Card', component: Card,
   args: { children: <><Tag>Guide</Tag><h3>Getting started</h3><p>Install the package and build your first screen.</p><TextLink href="#setup">Read the setup guide</TextLink></> },
   argTypes: { children: { control: false } },
-  parameters: { docs: { description: { component: 'An editorial article surface composed from ordinary content. Add a meaningful heading, optional metadata, a concise description, and a specific link. The card itself does not create an ambiguous click target or wrap nested controls in a link. Use a grid container for responsive collections; do not impose a fixed card height on long content.' } } },
+  parameters: { docs: { description: { component: 'An editorial article surface composed from ordinary content. Add a meaningful heading, optional metadata, a concise description, and a specific link. The card itself does not create an ambiguous click target or wrap nested controls in a link. When its link or button is hovered or focused, orange corner marks frame the card it belongs to. Use a grid container for responsive collections; do not impose a fixed card height on long content.' } } },
 } satisfies Meta<typeof Card>;
 export default meta;
 type Story = StoryObj<typeof meta>;

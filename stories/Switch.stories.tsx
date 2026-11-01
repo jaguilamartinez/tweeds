@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Switch', component: Switch,
   args: { label: 'Email notifications', checked: false, disabled: false, onCheckedChange: (_checked: boolean) => {} },
   argTypes: { onCheckedChange: { action: 'checked changed' } },
-  parameters: { docs: { description: { component: 'Use for an immediately applied on/off setting. Keep the label stable as state changes. Switch is controlled: pass checked and update it in onCheckedChange. Its accessible switch semantics and keyboard activation communicate state. Use Checkbox for a selection submitted later with a form.' } } },
+  parameters: { docs: { description: { component: 'Use for an immediately applied on/off setting. Keep the label stable as state changes. Turning it on sweeps lime across the track and the thumb springs over. Switch is controlled: pass checked and update it in onCheckedChange. Its accessible switch semantics and keyboard activation communicate state. Use Checkbox for a selection submitted later with a form.' } } },
 } satisfies Meta<typeof Switch>;
 export default meta;
 type Story = StoryObj<typeof meta>;

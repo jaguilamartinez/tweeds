@@ -1,4 +1,20 @@
+/* The canvas around a story takes the story's theme. */
+body.sb-show-main { background: var(--tw-color-cream); }
+body.sb-show-main:has(#storybook-root > [data-tw-theme='ink']) { background: var(--tw-color-charcoal); }
 .tw-story-stage { min-height: 160px; padding: var(--tw-space-lg); color: var(--tw-color-text); background: var(--tw-color-bg); }
+/* Each canvas is a small drawing sheet with registration marks in its corners. */
+.tw-story-stage { --tw-stage-mark: color-mix(in srgb, var(--tw-color-border) 65%, transparent); background-repeat: no-repeat; background-image:
+  linear-gradient(var(--tw-stage-mark) 0 0), linear-gradient(var(--tw-stage-mark) 0 0), linear-gradient(var(--tw-stage-mark) 0 0), linear-gradient(var(--tw-stage-mark) 0 0),
+  linear-gradient(var(--tw-stage-mark) 0 0), linear-gradient(var(--tw-stage-mark) 0 0), linear-gradient(var(--tw-stage-mark) 0 0), linear-gradient(var(--tw-stage-mark) 0 0);
+  background-size: 11px 1px, 1px 11px, 11px 1px, 1px 11px, 11px 1px, 1px 11px, 11px 1px, 1px 11px;
+  background-position: left 5px top 10px, left 10px top 5px, right 5px top 10px, right 10px top 5px, left 5px bottom 10px, left 10px bottom 5px, right 5px bottom 10px, right 10px bottom 5px; }
+/* Docs pages read as a drawing sheet: a grid field under the title, editorial headings, and mono notes. */
+.tw-docs .sbdocs-wrapper { background-color: var(--tw-color-bg); background-image: linear-gradient(to bottom, transparent, var(--tw-color-bg) 380px), linear-gradient(to right, var(--tw-color-line) 1px, transparent 1px), linear-gradient(to bottom, var(--tw-color-line) 1px, transparent 1px); background-size: 100% 100%, 24px 24px, 24px 24px; background-repeat: no-repeat, repeat, repeat; }
+.tw-docs .sbdocs-content h1:not(.sb-unstyled *) { margin: 8px 0 28px; font: 400 clamp(56px, 7vw, 96px)/.95 var(--tw-font-display); letter-spacing: -.03em; }
+.tw-docs .sbdocs-content h2:not(.sb-sr-only, .sb-unstyled *) { margin-top: 56px; padding-bottom: 12px; border-bottom: 1px solid var(--tw-color-line); font: 400 clamp(32px, 4vw, 44px)/1.1 var(--tw-font-display); letter-spacing: -.02em; }
+.tw-docs .sbdocs-content h3:not(.sb-unstyled *) { font: 500 20px/1.35 var(--tw-font-ui); letter-spacing: -.01em; }
+.tw-docs .sbdocs-content :is(p, li):not(.sb-unstyled *) { line-height: 1.7; }
+.tw-docs .sbdocs-content :not(pre) > code { font-family: var(--tw-font-mono); }
 .tw-story-stack { display: grid; gap: 24px; max-width: 720px; }
 .tw-story-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
 .tw-story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 24px; }

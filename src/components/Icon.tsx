@@ -18,10 +18,10 @@ export function Icon({ name, size = 20, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
       stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="butt" strokeLinejoin="miter"
-      aria-hidden="true" focusable="false" {...props}>
+      aria-hidden="true" focusable="false" data-tw-icon={name} {...props}>
       {drawing.outline}
       {size >= 28 && drawing.construction && (
-        <g opacity=".55" strokeWidth={strokeWidth * Number(componentTokens.icon.constructionRatio)}>{drawing.construction}</g>
+        <g className="tw-icon__construction" opacity=".55" strokeWidth={strokeWidth * Number(componentTokens.icon.constructionRatio)}>{drawing.construction}</g>
       )}
     </svg>
   );

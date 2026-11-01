@@ -252,6 +252,32 @@ test('lets readers compare artwork and preview motion at both track endpoints', 
   }
 });
 
+test('drafts the overview once and rests on the authored drawing', async ({ page }) => {
+  await page.goto('/#overview');
+  await expect(page.locator('figure.pb-geometry--overview .pb-geometry-drawing')).toBeVisible();
+  await expect(page.locator('[data-tw-reveal]'), 'Reduced motion shows the still drawing').toHaveCount(0);
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.reload();
+  const roots = page.locator('.pb-hero [data-tw-reveal]');
+  await expect(roots).toHaveCount(5);
+  // Each root waits until it is in view, so bring it there before expecting it to finish.
+  for (const root of await roots.all()) {
+    await root.scrollIntoViewIfNeeded();
+    await expect(root).toHaveAttribute('data-tw-reveal', 'done', { timeout: 10_000 });
+  }
+  const rest = await page.evaluate(() => ({
+    drawn: document.querySelectorAll('.pb-hero [data-tw-stroke="draw"]').length,
+    dashed: [...document.querySelectorAll('.pb-hero [data-tw-stroke="draw"]')].filter(shape => getComputedStyle(shape).strokeDasharray !== 'none').length,
+    running: document.getAnimations().filter(animation => animation.playState === 'running' && animation.effect?.getTiming().iterations !== Infinity).length,
+    interaction: getComputedStyle(document.querySelector('.pb-hero .pb-geometry-layer--interaction')!).transform,
+  }));
+  expect(rest.drawn, 'Pen strokes were drafted').toBeGreaterThan(20);
+  expect(rest.dashed, 'Every stroke rests undashed').toBe(0);
+  expect(rest.running).toBe(0);
+  expect(rest.interaction, 'Layers rest at their separated positions').toBe('matrix(1, 0, 0, 1, 0, -140)');
+});
+
 test('validates a form, moves focus to the error, and confirms a valid save', async ({ page }) => {
   await page.goto('/#patterns');
   const form = page.getByRole('tabpanel');

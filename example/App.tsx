@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, type MouseEvent } from 'react';
+import { flushSync } from 'react-dom';
 import { Icon, ThemeProvider, type Theme } from '@tinker-works/ui';
 import { CursorReadout } from './DraftingSheet';
 import Overview from './Overview';
@@ -31,6 +32,23 @@ const pages = {
 type Page = keyof typeof pages;
 const pageIds = Object.keys(pages) as Page[];
 const sheetNumber = (value: number) => String(value).padStart(2, '0');
+
+/** Spreads the next theme from the toggle like ink, where the browser supports view transitions. */
+function flipTheme(event: MouseEvent<HTMLElement>, update: () => void) {
+  if (typeof document.startViewTransition !== 'function' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    update();
+    return;
+  }
+  const { left, top, width, height } = event.currentTarget.getBoundingClientRect();
+  const x = left + width / 2;
+  const y = top + height / 2;
+  const root = document.documentElement;
+  root.style.setProperty('--pb-flip-x', `${x}px`);
+  root.style.setProperty('--pb-flip-y', `${y}px`);
+  root.style.setProperty('--pb-flip-r', `${Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y))}px`);
+  root.dataset.pbTransition = 'theme';
+  document.startViewTransition(() => flushSync(update)).finished.finally(() => { delete root.dataset.pbTransition; });
+}
 
 function currentPage(): Page {
   const id = window.location.hash.slice(1);
@@ -111,7 +129,7 @@ export default function App() {
             className="pb-theme-button"
             type="button"
             aria-label={`Switch to ${theme === 'paper' ? 'ink' : 'paper'} theme`}
-            onClick={() => setTheme(current => current === 'paper' ? 'ink' : 'paper')}
+            onClick={event => flipTheme(event, () => setTheme(current => current === 'paper' ? 'ink' : 'paper'))}
           >
             <Icon name={theme === 'paper' ? 'sun' : 'moon'} size={17} />
             <span>{theme === 'paper' ? 'Paper' : 'Ink'}</span>
@@ -119,7 +137,7 @@ export default function App() {
         </header>
         <main id="playbook-main" ref={main} tabIndex={-1} className={`pb-main pb-main--${page}`}>
           <Suspense fallback={<p className="pb-small" role="status">Loading reference…</p>}>
-            {page === 'overview' ? <Overview /> : <ReferencePage page={page} />}
+            <div key={page} className="pb-page">{page === 'overview' ? <Overview theme={theme} /> : <ReferencePage page={page} />}</div>
           </Suspense>
           <footer className="pb-page-footer">
             <span>Tweeds — Tinker Works Design System</span>

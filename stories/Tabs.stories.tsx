@@ -10,7 +10,7 @@ const meta = {
   title: 'Components/Tabs', component: Tabs,
   args: { items, defaultValue: 'overview' },
   argTypes: { items: { control: false }, onValueChange: { action: 'tab changed' } },
-  parameters: { docs: { description: { component: 'Organize related panels under short, predictable labels. A single signal-orange underline marks the selected tab. Labels remain readable, selection is exposed through aria-selected, and keyboard focus has its own visible outline. Tab enters the active tab; Left and Right move between tabs; Home and End reach the first and last. Panels are linked to their tabs by accessible IDs. Use defaultValue for local state or value/onValueChange for controlled state. Essential sequential reading should remain ordinary document sections.' } } },
+  parameters: { docs: { description: { component: 'Organize related panels under short, predictable labels. A single signal-orange underline marks the selected tab and travels from the previous tab when the selection changes. Labels remain readable, selection is exposed through aria-selected, and keyboard focus has its own visible outline. Tab enters the active tab; Left and Right move between tabs; Home and End reach the first and last. Panels are linked to their tabs by accessible IDs. Use defaultValue for local state or value/onValueChange for controlled state. Essential sequential reading should remain ordinary document sections.' } } },
 } satisfies Meta<typeof Tabs>;
 export default meta;
 type Story = StoryObj<typeof meta>;
