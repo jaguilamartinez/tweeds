@@ -156,7 +156,7 @@ test('preserves the brand typography and colored component signals in both theme
     const limeTag = tags.getByText('Complete', { exact: true });
     const orangeTag = tags.getByText('Needs attention', { exact: true });
     await expect(limeTag).toHaveCSS('background-color', 'rgb(199, 244, 100)');
-    await expect(orangeTag).toHaveCSS('background-color', 'rgb(255, 90, 0)');
+    await expect(orangeTag).toHaveCSS('background-color', 'rgb(240, 149, 99)');
     for (const tag of [limeTag, orangeTag]) await expect(tag).toHaveCSS('color', 'rgb(19, 21, 26)');
     const progress = tags.getByText('In progress', { exact: true });
     await expect(progress.locator('.tw-tag__status')).toHaveCSS('background-color', 'rgb(199, 244, 100)');
@@ -166,14 +166,14 @@ test('preserves the brand typography and colored component signals in both theme
     const tabs = page.getByRole('article', { name: 'Tabs', exact: true });
     const overview = tabs.getByRole('tab', { name: 'Overview', exact: true });
     await expect(overview).toHaveAttribute('aria-selected', 'true');
-    await expect(overview).toHaveCSS('border-bottom-color', 'rgb(255, 90, 0)');
+    await expect(overview).toHaveCSS('border-bottom-color', 'rgb(240, 149, 99)');
     expect(await overview.evaluate(tab => parseFloat(getComputedStyle(tab).borderBottomWidth))).toBeGreaterThan(0);
     await overview.focus();
     await page.keyboard.press('ArrowRight');
     const details = tabs.getByRole('tab', { name: 'Details', exact: true });
     await expect(details).toBeFocused();
     await expect(details).toHaveAttribute('aria-selected', 'true');
-    await expect(details).toHaveCSS('border-bottom-color', 'rgb(255, 90, 0)');
+    await expect(details).toHaveCSS('border-bottom-color', 'rgb(240, 149, 99)');
   }
 });
 
