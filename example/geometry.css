@@ -34,10 +34,29 @@
 .pb-geometry-label { fill: var(--tw-color-muted); stroke: none; font: 400 13px/1 var(--tw-font-mono); letter-spacing: .01em; }
 .pb-geometry-handnote { fill: var(--tw-color-text); stroke: none; font: italic 22px/1 var(--tw-font-display); }
 .pb-geometry-pen-note { stroke-width: .8; }
-.pb-geometry-layer { transition: transform var(--tw-motion-mechanism) var(--tw-motion-ease); }
+.pb-geometry-layer { transition: transform var(--tw-motion-mechanism) var(--tw-motion-ease), translate 700ms var(--tw-motion-ease); }
 .pb-geometry-layer--content { transform: translateY(-48px); }
 .pb-geometry-layer--interaction { transform: translateY(-140px); }
-.pb-geometry-separated-notes { transition: opacity var(--tw-motion-base) var(--tw-motion-ease); }
+.pb-geometry-separated-notes { transition: opacity var(--tw-motion-base) var(--tw-motion-ease), translate 700ms var(--tw-motion-ease); }
+.pb-geometry-base { transition: translate 700ms var(--tw-motion-ease); }
+/* Depth: a page can set --pb-tilt-x and --pb-tilt-y (-1 to 1) so nearer layers follow the pointer further. */
+.pb-geometry-base { translate: calc(var(--pb-tilt-x, 0) * -4px) calc(var(--pb-tilt-y, 0) * -3px); }
+.pb-geometry-layer--content { translate: calc(var(--pb-tilt-x, 0) * 5px) calc(var(--pb-tilt-y, 0) * 4px); }
+.pb-geometry-layer--interaction { translate: calc(var(--pb-tilt-x, 0) * 12px) calc(var(--pb-tilt-y, 0) * 9px); }
+.pb-geometry-separated-notes { translate: calc(var(--pb-tilt-x, 0) * 6px) calc(var(--pb-tilt-y, 0) * 5px); }
+/* Drafting sequence: guides first, then each layer's linework and markers. The layers lift apart and the notes are labelled. */
+.pb-geometry-layout { --tw-reveal-at: 120ms; --tw-motion-stagger: 24ms; }
+.pb-geometry-content { --tw-reveal-at: 420ms; --tw-motion-stagger: 28ms; }
+.pb-geometry-interaction { --tw-reveal-at: 720ms; }
+.pb-geometry-detail { --tw-reveal-at: 900ms; --tw-motion-stagger: 28ms; }
+.pb-geometry .tw-register { --tw-reveal-at: 1350ms; }
+.pb-geometry-marker--lime { --tw-reveal-at: 1250ms; }
+.pb-geometry-marker--orange { --tw-reveal-at: 1450ms; }
+.pb-geometry-layer--content { --tw-reveal-at: 1650ms; }
+.pb-geometry-layer--interaction { --tw-reveal-at: 1730ms; }
+.pb-geometry-dimension { --tw-reveal-at: 1800ms; }
+.pb-geometry-separated-notes { --tw-reveal-at: 2050ms; }
+.pb-geometry-note .tw-type { --tw-reveal-at: 2250ms; }
 .pb-geometry[data-layer-view="assembled"] .pb-geometry-layer { transform: translateY(0); }
 .pb-geometry[data-layer-view="assembled"] .pb-geometry-separated-notes { opacity: 0; }
 .pb-geometry figcaption { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 12px 24px; margin: 0 0 20px; color: var(--tw-color-muted); font: 400 13px/1.7 var(--tw-font-ui); }
@@ -60,5 +79,5 @@
   .pb-geometry-drawing--compact .pb-geometry-projection { opacity: .5; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pb-geometry-layer, .pb-geometry-separated-notes { transition: none; }
+  .pb-geometry-layer, .pb-geometry-separated-notes, .pb-geometry-base { transition: none; }
 }

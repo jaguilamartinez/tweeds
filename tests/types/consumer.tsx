@@ -1,8 +1,8 @@
 import { createRef } from 'react';
 import {
-  Button, Card, Icon, MathMark, TextField, ThemeProvider,
+  Button, Card, Icon, MathMark, TextField, ThemeProvider, useReveal,
   tokens as rootTokens,
-  type ButtonProps, type IconName, type MathMarkSymbol, type Theme,
+  type ButtonProps, type IconName, type MathMarkSymbol, type Reveal, type Theme,
 } from '@tinker-works/ui';
 import {
   tokens, primitiveTokens, semanticTokens, componentTokens, brandTokens,
@@ -17,7 +17,7 @@ const markRef = createRef<SVGSVGElement>();
 const buttonProps: ButtonProps = { type: 'submit', variant: 'primary', size: 'sm' };
 
 export const publicComposition = (
-  <ThemeProvider theme={theme} aria-label="Profile settings">
+  <ThemeProvider theme={theme} motion="off" aria-label="Profile settings">
     <Card>
       <TextField label="Display name" name="displayName" required />
       <Button {...buttonProps} ref={buttonRef} icon={<Icon name={icon} />}>Save changes</Button>
@@ -26,6 +26,11 @@ export const publicComposition = (
   </ThemeProvider>
 );
 
+export function DraftedDrawing() {
+  const reveal: Reveal<SVGSVGElement> = useReveal<SVGSVGElement>({ threshold: 0.5 });
+  return <svg ref={reveal.ref} onClick={reveal.replay}><path className="tw-draft" d="M0 0h10" /></svg>;
+}
+
 export const tokenValues: string[] = [
   rootTokens.primitive.color.charcoal,
   tokens.primitive.font.logo,
@@ -33,6 +38,7 @@ export const tokenValues: string[] = [
   semanticTokens[theme].color.focus,
   componentTokens.button.heightMd,
   brandTokens.colorUsage.lime,
+  primitiveTokens.motion.easeMechanism,
 ];
 
 // Public literal choices must remain narrow in emitted declarations.
@@ -40,5 +46,8 @@ export const tokenValues: string[] = [
 const unsupportedTheme: Theme = 'sepia';
 // @ts-expect-error Button variants are not arbitrary strings.
 const unsupportedVariant: ButtonProps = { variant: 'rainbow' };
+// @ts-expect-error Motion is either automatic or off.
+const unsupportedMotion = <ThemeProvider motion="slow" />;
+void unsupportedMotion;
 void unsupportedTheme;
 void unsupportedVariant;
