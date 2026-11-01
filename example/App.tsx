@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Icon, ThemeProvider, type Theme } from '@tinker-works/ui';
+import { CursorReadout } from './DraftingSheet';
 import Overview from './Overview';
 import { TweedsLogo } from './TweedsLogo';
 
@@ -29,6 +30,7 @@ const pages = {
 
 type Page = keyof typeof pages;
 const pageIds = Object.keys(pages) as Page[];
+const sheetNumber = (value: number) => String(value).padStart(2, '0');
 
 function currentPage(): Page {
   const id = window.location.hash.slice(1);
@@ -48,6 +50,8 @@ export default function App() {
   const [theme, setTheme] = useState<Theme>('paper');
   const [menuOpen, setMenuOpen] = useState(false);
   const main = useRef<HTMLElement>(null);
+  const shell = useRef<HTMLDivElement>(null);
+  const topbar = useRef<HTMLElement>(null);
   const menuToggle = useRef<HTMLButtonElement>(null);
   const selected = pages[page];
 
@@ -98,9 +102,11 @@ export default function App() {
         </nav>
         <div className="pb-sidebar-footer"><span>Tweeds</span><code>v0.1.0</code></div>
       </aside>
-      <div className="pb-shell">
-        <header className="pb-topbar">
-          <span>{selected.label}</span>
+      <div className="pb-shell" ref={shell}>
+        <header className="pb-topbar" ref={topbar}>
+          <span className="pb-sheet"><span className="pb-sheet__number" aria-hidden="true">Sheet {sheetNumber(pageIds.indexOf(page) + 1)} / {sheetNumber(pageIds.length)}</span><span>{selected.label}</span></span>
+          <CursorReadout sheet={shell} origin={main} ruler={topbar} />
+          <span className="pb-ruler-marker" aria-hidden="true" />
           <button
             className="pb-theme-button"
             type="button"

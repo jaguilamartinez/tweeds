@@ -52,8 +52,14 @@
   --tw-shadow-sm: 0 2px 8px rgb(0 0 0 / 8%);
   --tw-motion-fast: 140ms;
   --tw-motion-base: 240ms;
+  --tw-motion-mark: 420ms;
   --tw-motion-mechanism: 600ms;
+  --tw-motion-draw: 900ms;
+  --tw-motion-stagger: 36ms;
   --tw-motion-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --tw-motion-ease-pen: cubic-bezier(0.55, 0, 0.25, 1);
+  --tw-motion-ease-mark: cubic-bezier(0.3, 0, 0, 1);
+  --tw-motion-ease-mechanism: linear(0, 0.042, 0.143, 0.277, 0.42, 0.56, 0.685, 0.792, 0.879, 0.945, 0.992, 1.024, 1.043, 1.052, 1.054, 1.051, 1.045, 1.038, 1.03, 1.023, 1.016, 1.01, 1.006, 1.002, 1, 0.998, 0.998, 0.997, 1);
   --tw-layer-base: 0;
   --tw-layer-raised: 1;
   --tw-layer-sticky: 10;

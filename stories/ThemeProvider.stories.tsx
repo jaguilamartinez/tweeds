@@ -5,8 +5,8 @@ const Sample = () => <div className="tw-story-stack"><h2 style={{ fontFamily: 'I
 const meta = {
   title: 'Foundations/ThemeProvider', component: ThemeProvider,
   args: { theme: 'paper', children: <Sample /> },
-  argTypes: { theme: { control: 'inline-radio', options: ['paper', 'ink'] }, children: { control: false } },
-  parameters: { docs: { description: { component: 'ThemeProvider establishes a local data-tw-theme boundary for CSS custom properties. Paper is the editorial default; ink reverses the hierarchy for a deliberate dark surface. It forwards native div attributes, so className and style can define layout or scoped token overrides. It does not access global document state, and themes can nest safely. Use the toolbar to inspect every component in either theme.' } } },
+  argTypes: { theme: { control: 'inline-radio', options: ['paper', 'ink'] }, motion: { control: 'inline-radio', options: ['auto', 'off'] }, children: { control: false } },
+  parameters: { docs: { description: { component: 'ThemeProvider establishes a local data-tw-theme boundary for CSS custom properties. Paper is the editorial default; ink reverses the hierarchy for a deliberate dark surface. It forwards native div attributes, so className and style can define layout or scoped token overrides. It does not access global document state, and themes can nest safely. Set motion to off to show every animation and transition in the subtree as a still image. Use the toolbar to inspect every component in either theme.' } } },
 } satisfies Meta<typeof ThemeProvider>;
 export default meta;
 type Story = StoryObj<typeof meta>;

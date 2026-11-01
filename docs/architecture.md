@@ -22,7 +22,7 @@ Use semantic custom properties in components. Select a primitive directly only f
 
 ## Public contract
 
-The root entry exports components, their TypeScript types, the theme boundary, and token objects. Additional exports expose CSS, the optional font stylesheet, the token module, and raw token JSON. Consumers import public paths and avoid reaching into source folders.
+The root entry exports components, their TypeScript types, the theme boundary, the `useReveal` motion hook, and token objects. Additional exports expose CSS, the optional font stylesheet, the token module, and raw token JSON. Consumers import public paths and avoid reaching into source folders.
 
 CSS uses the `tw-` namespace for classes and custom properties. Components share primitive and semantic values instead of inventing a palette or spacing scale. Public names follow PascalCase for components, camelCase for props, and short literal unions for variants and sizes. Native attributes are preserved where possible.
 
@@ -62,7 +62,7 @@ The larger SVG illustration in `example/` shows the layers of an interface, with
 
 `example/FigureStudy.tsx` is a smaller connection drawing shared by the component catalog and TechnicalFigure stories. It returns an accessible SVG, so it can be placed inside the public wrapper without nesting figures. Keep these authored studies in the example layer rather than baking their paths or application concepts into a reusable component.
 
-The overview and Foundations specimen each offer a manual control for assembling or separating their interface layers. The control names its drawing and announces the resulting state in text. Reduced motion removes the transform transition. There is no automatic or looping animation. Keep future animated drawings usable as still images and let the reader choose when to change a view.
+The interface drawing drafts itself once each time it scrolls into view: guides, then each layer's linework, then its markers, before the layers lift apart and the notes are labelled. It then rests on the authored still image and never loops. The overview and Foundations specimen also offer a manual control for assembling or separating the layers. The control names its drawing and announces the resulting state in text. Reduced motion shows the finished drawing and removes the transform transition. On the overview, nearer layers follow a fine pointer by a few pixels; touch input and reduced motion leave them still. Keep future animated drawings usable as still images, and let the reader choose any change of view after the first drawing.
 
 Orange and lime marks should identify the part under discussion. Use labels and shape changes as well as color. Keep guides lighter than the main contour, and keep annotations readable at the final display size. A mobile drawing may omit secondary views and notes while retaining the subject. Grid fields belong behind drawings rather than reading text.
 
@@ -76,11 +76,40 @@ The private `example/common-thread/model.ts` owns its shared domain types, and `
 
 ## Theming
 
-`ThemeProvider` creates a local `data-tw-theme` boundary. CSS values inherit from the nearest boundary. Paper is the default; Ink is the dark theme. Themes can nest, allowing a Paper card inside an Ink section.
+`ThemeProvider` creates a local `data-tw-theme` boundary. CSS values inherit from the nearest boundary. Paper is the default; Ink is the dark theme. Themes can nest, allowing a Paper card inside an Ink section. `motion="off"` renders every animation and transition in its subtree as a still image, for capture and comparison; nested boundaries inherit it.
 
 Print resets every semantic color role to the Paper palette, including error text, control boundaries, and action colors. Verify print through browser media emulation so Ink foregrounds cannot remain on light print surfaces.
 
 Apply overrides at the narrowest useful scope. Semantic properties include `--tw-color-bg`, `--tw-color-surface`, `--tw-color-text`, `--tw-color-muted`, `--tw-color-border`, and `--tw-color-focus`. Preserve orange and lime's meaning and verify foreground/background contrast when changing a color pair. To add a theme, extend the token source, generated selector, theme type, and Storybook toolbar, then run the same component checks in that theme.
+
+## Motion
+
+Motion in Tweeds is drafting: it shows how a drawing or a page is put together, in the order a person would make it. `primitive.motion` holds the durations (`fast` for feedback, `base` for state changes, and `mark`, `mechanism`, and `draw` for the verbs below), a `stagger` between strokes, and four easing curves. `ease` settles, `easePen` accelerates and slows like a pen stroke, `easeMark` makes one decisive sweep, and `easeMechanism` is a damped spring with a small overshoot. Browsers without `linear()` easing use their default curve for the spring.
+
+The stylesheet provides six verbs as classes:
+
+- `tw-draft` draws each stroked shape in a group along its path. Dashed and fill-only shapes fade in.
+- `tw-mark` sweeps a highlighter region in from its leading edge.
+- `tw-register` turns a mark and snaps it onto its point.
+- `tw-measure` extends a rule from its starting edge.
+- `tw-type` reveals an annotation a character at a time. Set `--tw-type-steps` to the label length.
+- `tw-assemble` moves a part from `--tw-assemble-from` (the assembled stack by default) to its resting transform. Set `--tw-assemble-opacity: 0` when the part should also appear.
+
+Set `--tw-reveal-at` on a verb or group to place it in the sequence. Shapes in a `tw-draft` group follow document order, one `stagger` apart.
+
+Verbs play only inside a reveal root. `useReveal()` returns a `ref` for the root and a `replay` function. The root holds its verbs on their first frame until it scrolls into view, plays them once, and then removes them. Every animation fills backwards only, so the resting style is the still image. Without the hook, under reduced motion, in print, and inside `ThemeProvider motion="off"`, the authored drawing is shown as it is. Reveal roots do not nest; give separate regions their own root.
+
+```tsx
+import { useReveal } from '@tinker-works/ui';
+
+const reveal = useReveal<SVGSVGElement>();
+<svg ref={reveal.ref} viewBox="0 0 240 160">
+  <g className="tw-draft">{/* guides and linework */}</g>
+  <path className="tw-mark" style={{ '--tw-reveal-at': '900ms' } as CSSProperties} d="…" />
+</svg>
+```
+
+Use motion when it explains something: the order of construction, the part under discussion, or the result of an action. Keep a sequence under about 2.5 seconds, keep content readable while it plays, and never loop. Pointer-driven effects respond only to a fine pointer and stop under reduced motion.
 
 ## Adding a component
 

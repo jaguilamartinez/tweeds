@@ -1,0 +1,44 @@
+/* Drafting verbs: motion draws, marks, registers, measures, types, and assembles authored artwork.
+   Verbs animate only inside a reveal root (data-tw-reveal, managed by useReveal). A pending root
+   holds them on their first frame, a playing root runs them once, and a finished root removes them.
+   Every animation fills backwards only, so each element comes to rest on its authored style. */
+.tw-register, .tw-measure { transform-box: fill-box; }
+.tw-register { transform-origin: center; }
+.tw-measure { transform-origin: 0 50%; }
+
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) :where([data-tw-stroke], .tw-mark, .tw-register, .tw-measure, .tw-type, .tw-assemble) {
+  animation-delay: calc(var(--tw-reveal-at, 0ms) + var(--tw-reveal-order, 0) * var(--tw-motion-stagger));
+  animation-fill-mode: backwards;
+}
+[data-tw-reveal='pending'] :where([data-tw-stroke], .tw-mark, .tw-register, .tw-measure, .tw-type, .tw-assemble) { animation-play-state: paused; }
+
+/* Draft: a pen line travels its path while any fill settles in. Dashed and fill-only shapes fade. */
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) [data-tw-stroke='draw'] { animation-name: tw-draft; animation-duration: var(--tw-motion-draw); animation-timing-function: var(--tw-motion-ease-pen); }
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) [data-tw-stroke='fade'] { animation-name: tw-fade; animation-duration: var(--tw-motion-mechanism); animation-timing-function: var(--tw-motion-ease); }
+/* Mark: a highlighter sweeps across the region in one decisive stroke. */
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .tw-mark { animation-name: tw-mark; animation-duration: var(--tw-motion-mark); animation-timing-function: var(--tw-motion-ease-mark); }
+/* Register: a mark turns and snaps onto its point. */
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .tw-register { animation-name: tw-register; animation-duration: var(--tw-motion-mechanism); animation-timing-function: var(--tw-motion-ease-mechanism); }
+/* Measure: a rule extends from its starting edge. */
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .tw-measure { animation-name: tw-measure; animation-duration: var(--tw-motion-mechanism); animation-timing-function: var(--tw-motion-ease-pen); }
+/* Type: an annotation appears a character at a time. Set --tw-type-steps to the label length. */
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .tw-type { animation-name: tw-type; animation-duration: calc(var(--tw-type-steps, 12) * 28ms); animation-timing-function: steps(var(--tw-type-steps, 12), end); }
+/* Assemble: a part travels from --tw-assemble-from (the assembled stack by default) to where it rests.
+   Set --tw-assemble-opacity to 0 when the part should also appear as it arrives. */
+:where([data-tw-reveal='pending'], [data-tw-reveal='play']) .tw-assemble { animation-name: tw-assemble; animation-duration: var(--tw-motion-mechanism); animation-timing-function: var(--tw-motion-ease-mechanism); }
+
+@keyframes tw-draft {
+  from { stroke-dasharray: var(--tw-stroke-length) calc(var(--tw-stroke-length) * 2); stroke-dashoffset: calc(var(--tw-stroke-length) + 2px); fill-opacity: 0; }
+  to { stroke-dasharray: var(--tw-stroke-length) calc(var(--tw-stroke-length) * 2); stroke-dashoffset: 0; }
+}
+@keyframes tw-fade { from { opacity: 0; } }
+@keyframes tw-mark { from { clip-path: inset(-4px 100% -4px -4px); } to { clip-path: inset(-4px); } }
+@keyframes tw-register { from { transform: scale(0) rotate(-90deg); opacity: 0; } }
+@keyframes tw-measure { from { transform: scaleX(0); } }
+@keyframes tw-type { from { clip-path: inset(-4px 100% -4px -4px); } to { clip-path: inset(-4px); } }
+@keyframes tw-assemble { from { transform: var(--tw-assemble-from, none); opacity: var(--tw-assemble-opacity, 1); } }
+
+/* A motion="off" theme boundary renders every state as a still image, for capture and comparison. */
+[data-tw-motion='off'], [data-tw-motion='off'] *, [data-tw-motion='off'] *::before, [data-tw-motion='off'] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+@media (prefers-reduced-motion: reduce) { [data-tw-reveal] * { animation: none !important; } }
+@media print { [data-tw-reveal] * { animation: none !important; } }
