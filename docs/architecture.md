@@ -42,7 +42,9 @@ The project pins pnpm 11.25.0. Its `pnpm-workspace.yaml` includes only the root 
 
 Keep the chosen button size when its state changes. Disabled and loading controls retain the same height as an enabled control of that size. Paper inputs use a square charcoal keyboard-focus outline. Error fields retain a high-contrast charcoal or cream boundary and readable foreground text. An orange inset marker adds a visual cue; the message and its association with the field carry the meaning.
 
-`Tabs` supports controlled or local selection and the horizontal tab keyboard pattern. Uncontrolled selection retains a valid fallback when items arrive, disappear, or reorder; an empty loading interval preserves the last selection. Normalization does not emit user-change callbacks. A selected tab uses a single orange underline; current navigation links use a text underline. `Pagination` uses one-based page numbers. `Navigation` adapts to a compact menu and owns the home link around its logo slot; pass a logo element rather than another anchor.
+Controls answer in the drawing language rather than with a fade. On hover, a button's second sheet slides out behind it like a second pass of the pen, and pressing moves the button onto that sheet. The sheet is an outer shadow, so it never paints under the button; `--tw-button-backdrop` names the surface behind it and `Card` sets it to its own surface. Keyboard focus keeps the outline and adds registration corners that snap in around it. Signal sweeps a lighter mark across on hover. A link keeps a thin rule at rest, and an orange pen line draws over it on hover. Arrow icons nudge in the direction they point; `Icon` exposes its name as `data-tw-icon` for this. A checkbox tick is drawn with the pen. A switch sweeps lime across its track and its thumb springs over. Loading shows an asterisk that turns a sixth of a revolution at a time; reduced motion replaces it with a dotted ring. When an action inside a `Card` is hovered or focused, orange corner marks frame that card. `Alert` registers its mark and `EmptyState` draws its icon when they first appear.
+
+`Tabs` supports controlled or local selection and the horizontal tab keyboard pattern. Uncontrolled selection retains a valid fallback when items arrive, disappear, or reorder; an empty loading interval preserves the last selection. Normalization does not emit user-change callbacks. A selected tab uses a single orange underline. When the selection changes, the underline travels from the previous tab and then rests on the selected tab's own border; reduced motion skips the journey. Current navigation links use a text underline. `Pagination` uses one-based page numbers. `Navigation` adapts to a compact menu and owns the home link around its logo slot; pass a logo element rather than another anchor.
 
 `TechnicalFigure` is a native `<figure>` wrapper with required `children`, an optional React `caption`, and a `figure` label that defaults to `FIG. 001`. It forwards native HTML attributes and `className`. The application owns the image, SVG, code, or other supplied content, along with any controls or animation. Keep the caption and figure number in the wrapper; do not pass another `<figure>` as its child. The wrapper contains no built-in illustration or subject-specific state.
 
@@ -58,9 +60,9 @@ import { MathMark } from '@tinker-works/ui';
 <MathMark symbol="plus" tone="orange" size={128} />
 ```
 
-The larger SVG illustration in `example/` shows the layers of an interface, with alignment guides, interaction details, hatching, and marker accents. Overview and the Foundations story share that implementation. It is documentation artwork rather than a public component. Keep drawing helpers close to the artwork and reuse them for repeated panels and marks. Use small, intentional variations to suggest a pen drawing; avoid random geometry that changes on each render or makes screenshots unstable.
+The larger SVG illustration in `example/` shows the layers of an interface, with alignment guides, interaction details, hatching, and marker accents. Overview, Foundations, and the Storybook motion and Foundations stories share that implementation. `example/OverviewSheet.tsx` frames it as the opening drawing sheet with the brand statement and a title block; the playbook Overview and the Storybook Welcome page both render it. It is documentation artwork rather than a public component. Keep drawing helpers close to the artwork and reuse them for repeated panels and marks. Use small, intentional variations to suggest a pen drawing; avoid random geometry that changes on each render or makes screenshots unstable.
 
-`example/FigureStudy.tsx` is a smaller connection drawing shared by the component catalog and TechnicalFigure stories. It returns an accessible SVG, so it can be placed inside the public wrapper without nesting figures. Keep these authored studies in the example layer rather than baking their paths or application concepts into a reusable component.
+`example/FigureStudy.tsx` is a smaller connection drawing shared by the component catalog and TechnicalFigure stories. It drafts itself when it scrolls into view; pass `drafted={false}` when a surrounding root already reveals it. `example/MotionStudy.tsx` holds the verb specimens and the easing plots shared by Foundations and the Storybook motion stories. It returns an accessible SVG, so it can be placed inside the public wrapper without nesting figures. Keep these authored studies in the example layer rather than baking their paths or application concepts into a reusable component.
 
 The interface drawing drafts itself once each time it scrolls into view: guides, then each layer's linework, then its markers, before the layers lift apart and the notes are labelled. It then rests on the authored still image and never loops. The overview and Foundations specimen also offer a manual control for assembling or separating the layers. The control names its drawing and announces the resulting state in text. Reduced motion shows the finished drawing and removes the transform transition. On the overview, nearer layers follow a fine pointer by a few pixels; touch input and reduced motion leave them still. Keep future animated drawings usable as still images, and let the reader choose any change of view after the first drawing.
 
@@ -77,6 +79,8 @@ The private `example/common-thread/model.ts` owns its shared domain types, and `
 ## Theming
 
 `ThemeProvider` creates a local `data-tw-theme` boundary. CSS values inherit from the nearest boundary. Paper is the default; Ink is the dark theme. Themes can nest, allowing a Paper card inside an Ink section. `motion="off"` renders every animation and transition in its subtree as a still image, for capture and comparison; nested boundaries inherit it.
+
+Storybook follows the toolbar theme in its manager (`.storybook/theme.ts` and `manager.ts`) and on docs pages (`.storybook/DocsContainer.tsx`), and each canvas carries registration marks in its corners.
 
 Print resets every semantic color role to the Paper palette, including error text, control boundaries, and action colors. Verify print through browser media emulation so Ink foregrounds cannot remain on light print surfaces.
 
@@ -97,7 +101,7 @@ The stylesheet provides six verbs as classes:
 
 Set `--tw-reveal-at` on a verb or group to place it in the sequence. Shapes in a `tw-draft` group follow document order, one `stagger` apart.
 
-Verbs play only inside a reveal root. `useReveal()` returns a `ref` for the root and a `replay` function. The root holds its verbs on their first frame until it scrolls into view, plays them once, and then removes them. Every animation fills backwards only, so the resting style is the still image. Without the hook, under reduced motion, in print, and inside `ThemeProvider motion="off"`, the authored drawing is shown as it is. Reveal roots do not nest; give separate regions their own root.
+Verbs play only inside a reveal root. `useReveal()` returns a `ref` for the root and a `replay` function. The root holds its verbs on their first frame until it scrolls into view, plays them once, and then removes them. Every animation fills backwards only, so the resting style is the still image. Without the hook, under reduced motion, in print, and inside `ThemeProvider motion="off"`, the authored drawing is shown as it is. The root also waits for any other finite CSS animation inside it, so a page can add its own sequence beside the verbs. Reveal roots do not nest; give separate regions their own root.
 
 ```tsx
 import { useReveal } from '@tinker-works/ui';
@@ -110,6 +114,8 @@ const reveal = useReveal<SVGSVGElement>();
 ```
 
 Use motion when it explains something: the order of construction, the part under discussion, or the result of an action. Keep a sequence under about 2.5 seconds, keep content readable while it plays, and never loop. Pointer-driven effects respond only to a fine pointer and stop under reduced motion.
+
+In the playbook, a new page rises into place, and Paper and Ink spread from the theme toggle where the browser supports view transitions. Foundations sections are numbered figures whose rules are measured out as they arrive; spacing tokens are dimension lines, and each easing token is plotted with a point that traces it.
 
 ## Adding a component
 

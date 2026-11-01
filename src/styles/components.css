@@ -5,33 +5,52 @@
 .tw-logo--compact { font-size: 39px; }
 .tw-logo--monogram { font-size: 52px; }
 .tw-logo--monogram .tw-logo__art { width: 1.78em; height: .84em; }
-.tw-button { appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: var(--tw-space-sm); min-height: var(--tw-button-height-md); border: 1px solid transparent; border-radius: var(--tw-button-radius); padding: 10px 16px; font-family: var(--tw-font-ui); font-size: 14px; font-weight: 400; line-height: 1.4; text-decoration: none; cursor: pointer; transition: background-color var(--tw-motion-fast), color var(--tw-motion-fast), border-color var(--tw-motion-fast), opacity var(--tw-motion-fast); }
+.tw-button { --tw-button-backdrop: var(--tw-color-bg); --tw-button-sheet: 0px; appearance: none; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--tw-space-sm); min-height: var(--tw-button-height-md); border: 1px solid transparent; border-radius: var(--tw-button-radius); padding: 10px 16px; font-family: var(--tw-font-ui); font-size: 14px; font-weight: 400; line-height: 1.4; text-decoration: none; cursor: pointer; transition: background-color var(--tw-motion-fast), background-size var(--tw-motion-mark) var(--tw-motion-ease-mark), color var(--tw-motion-fast), border-color var(--tw-motion-fast), opacity var(--tw-motion-fast), translate var(--tw-motion-fast) var(--tw-motion-ease), box-shadow var(--tw-motion-base) var(--tw-motion-ease-mechanism); }
+/* A second sheet slides out behind the button on hover, like a second pass of the pen. Outer shadows never paint under the button. */
+.tw-button:not(.tw-button--tertiary) { box-shadow: var(--tw-button-sheet) var(--tw-button-sheet) 0 -1px var(--tw-button-backdrop), var(--tw-button-sheet) var(--tw-button-sheet) 0 0 color-mix(in srgb, var(--tw-color-text) 55%, transparent); }
+.tw-button:not(:disabled):hover { --tw-button-sheet: 3px; }
+.tw-button:not(:disabled):active { --tw-button-sheet: 2px; translate: 1px 1px; }
+/* Focus keeps its outline and gains registration corners that snap in around it. */
+.tw-button::before { content: ''; position: absolute; inset: -9px; pointer-events: none; opacity: 0; scale: 1.12; transition: opacity var(--tw-motion-fast) linear, scale var(--tw-motion-base) var(--tw-motion-ease-mechanism); background-repeat: no-repeat; background-image: linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0), linear-gradient(var(--tw-color-focus) 0 0); background-size: 7px 1px, 1px 7px; background-position: left top, left top, right top, right top, left bottom, left bottom, right bottom, right bottom; }
+.tw-button:focus-visible::before { opacity: 1; scale: 1; }
 .tw-button--primary { color: var(--tw-color-action-text); background: var(--tw-color-action); border-color: var(--tw-color-action); }
 .tw-button--secondary { color: var(--tw-color-text); background: transparent; border-color: var(--tw-color-border); }
 .tw-button--tertiary { color: var(--tw-color-text); background: transparent; padding-inline: 0; border-radius: 0; }
-.tw-button--signal { color: var(--tw-color-charcoal); background: var(--tw-color-accent); border-color: var(--tw-color-accent); }
+/* Signal sweeps a lighter mark across on hover. */
+.tw-button--signal { color: var(--tw-color-charcoal); background: linear-gradient(color-mix(in srgb, var(--tw-color-accent) 76%, var(--tw-color-cream)) 0 0) no-repeat left / 0% 100%, var(--tw-color-accent); border-color: var(--tw-color-accent); }
 .tw-button--sm { min-height: var(--tw-button-height-sm); padding: 8px 12px; font-size: 13px; }
 .tw-button--lg { min-height: var(--tw-button-height-lg); padding: 14px 24px; font-size: 16px; }
 .tw-button__icon { display: inline-flex; flex-shrink: 0; align-items: center; }
-.tw-button--primary:not(:disabled):hover { opacity: .86; }
 .tw-button--secondary:not(:disabled):hover { border-color: var(--tw-color-text); background: color-mix(in srgb, var(--tw-color-text) 5%, transparent); }
-.tw-button--tertiary:not(:disabled):hover { text-decoration: underline; text-underline-offset: 5px; }
-.tw-button--signal:not(:disabled):hover { border-color: var(--tw-color-charcoal); }
-.tw-button--primary:not(:disabled):active, .tw-button--signal:not(:disabled):active { opacity: .76; }
+.tw-button--tertiary .tw-button__label { padding-bottom: 2px; background: linear-gradient(currentColor 0 0) no-repeat left bottom / 0% 1px; transition: background-size var(--tw-motion-base) var(--tw-motion-ease-pen); }
+.tw-button--tertiary:not(:disabled):hover .tw-button__label { background-size: 100% 1px; }
+.tw-button--signal:not(:disabled):hover { background-size: 100% 100%, auto; }
 .tw-button--secondary:not(:disabled):active { background: color-mix(in srgb, var(--tw-color-text) 9%, transparent); }
 .tw-button:disabled { cursor: not-allowed; opacity: .45; }
 .tw-button:focus-visible, .tw-text-link:focus-visible, .tw-switch__control:focus-visible, .tw-nav a:focus-visible, .tw-nav__toggle:focus-visible, .tw-tabs__tab:focus-visible, .tw-tabs__panel:focus-visible { outline: var(--tw-focus-width) solid var(--tw-color-focus); outline-offset: var(--tw-focus-offset); }
-.tw-spinner { width: 15px; height: 15px; flex: 0 0 15px; border: 1.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: tw-spin .8s linear infinite; }
-@keyframes tw-spin { to { transform: rotate(360deg); } }
-.tw-text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: var(--tw-font-ui); font-weight: 400; color: var(--tw-color-text); text-decoration: underline; text-decoration-color: currentColor; text-underline-offset: 5px; }
-.tw-text-link:hover { text-decoration-thickness: 2px; }
+.tw-spinner { width: 15px; height: 15px; flex: 0 0 15px; fill: none; stroke: currentColor; stroke-width: 1.5; animation: tw-tick 720ms var(--tw-motion-ease-mechanism) infinite; }
+.tw-spinner__ring { display: none; stroke-dasharray: 1.5 2.2; }
+/* Each tick turns the asterisk a sixth of a revolution, which leaves it looking the same: a clockwork rhythm with no visible end. */
+@keyframes tw-tick { 0% { rotate: 0deg; } 46%, 100% { rotate: 60deg; } }
+[data-tw-icon^='arrow'] { transition: translate var(--tw-motion-fast) var(--tw-motion-ease); }
+:is(.tw-button:not(:disabled), .tw-text-link):hover [data-tw-icon='arrow-right'] { translate: 3px 0; }
+:is(.tw-button:not(:disabled), .tw-text-link):hover [data-tw-icon='arrow-left'] { translate: -3px 0; }
+:is(.tw-button:not(:disabled), .tw-text-link):hover [data-tw-icon='arrow-up-right'] { translate: 2px -2px; }
+:is(.tw-button:not(:disabled), .tw-text-link):hover [data-tw-icon='arrow-down-right'] { translate: 2px 2px; }
+/* A thin rule marks the link at rest; on hover an orange pen line draws over it from the left. */
+.tw-text-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: var(--tw-font-ui); font-weight: 400; color: var(--tw-color-text); text-decoration: none; }
+.tw-text-link__label { padding-bottom: 3px; background: linear-gradient(var(--tw-color-accent) 0 0) no-repeat left bottom / 0% 2px, linear-gradient(currentColor 0 0) no-repeat left bottom / 100% 1px; transition: background-size var(--tw-motion-base) var(--tw-motion-ease-pen); }
+.tw-text-link:hover .tw-text-link__label { background-size: 100% 2px, 100% 1px; }
 .tw-tag { display: inline-flex; align-items: center; gap: var(--tw-space-sm); border: 1px solid var(--tw-color-border); border-radius: var(--tw-tag-radius); padding: 3px 7px; color: var(--tw-color-text); background: transparent; font-family: var(--tw-font-mono); font-size: var(--tw-tag-font-size); font-weight: 400; line-height: 1.4; letter-spacing: .025em; text-transform: uppercase; white-space: nowrap; }
 .tw-tag--orange { color: var(--tw-color-charcoal); background: var(--tw-color-accent); border-color: var(--tw-color-accent); }
 .tw-tag--lime { color: var(--tw-color-charcoal); background: var(--tw-color-discovery); border-color: var(--tw-color-discovery); }
 .tw-tag:has(.tw-tag__status) { padding-inline: 0; color: var(--tw-color-text); background: transparent; border-color: transparent; }
 .tw-tag__status { width: 5px; height: 5px; flex-shrink: 0; border-radius: 50%; background: var(--tw-color-discovery); }
 .tw-tag--orange .tw-tag__status { background: var(--tw-color-accent); }
-.tw-card { position: relative; min-width: 0; border: 1px solid var(--tw-color-border); background: var(--tw-color-surface); padding: var(--tw-space-lg); color: var(--tw-color-text); }
+.tw-card { --tw-button-backdrop: var(--tw-color-surface); position: relative; min-width: 0; border: 1px solid var(--tw-color-border); background: var(--tw-color-surface); padding: var(--tw-space-lg); color: var(--tw-color-text); }
+/* When an action inside the card is in use, orange corner marks frame the card it belongs to. */
+.tw-card::before { content: ''; position: absolute; inset: -7px; pointer-events: none; opacity: 0; scale: 1.03; transition: opacity var(--tw-motion-fast) linear, scale var(--tw-motion-base) var(--tw-motion-ease-mechanism); background-repeat: no-repeat; background-image: linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0), linear-gradient(var(--tw-color-accent) 0 0); background-size: 12px 1px, 1px 12px; background-position: left top, left top, right top, right top, left bottom, left bottom, right bottom, right bottom; }
+.tw-card:has(:is(a, button):is(:hover, :focus-visible))::before { opacity: 1; scale: 1; }
 .tw-card h2, .tw-card h3 { font-family: var(--tw-font-ui); font-weight: 500; line-height: 1.2; }
 .tw-card p { color: var(--tw-color-muted); line-height: 1.65; }
 .tw-field { display: grid; gap: 8px; min-width: 0; font-family: var(--tw-font-ui); color: var(--tw-color-text); }
@@ -50,17 +69,19 @@
 .tw-field__error { color: var(--tw-color-error); }
 .tw-checkbox { position: relative; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; font: 400 14px/1.5 var(--tw-font-ui); color: var(--tw-color-text); }
 .tw-checkbox input { position: absolute; width: 20px; height: 20px; margin: 0; opacity: 0; }
-.tw-checkbox__box { display: inline-flex; flex: 0 0 19px; align-items: center; justify-content: center; width: 19px; height: 19px; border: 1px solid var(--tw-color-border); border-radius: 1px; background: var(--tw-color-bg); }
-.tw-checkbox__box svg { visibility: hidden; }
+.tw-checkbox__box { display: inline-flex; flex: 0 0 19px; align-items: center; justify-content: center; width: 19px; height: 19px; border: 1px solid var(--tw-color-border); border-radius: 1px; background: var(--tw-color-bg); transition: background-color var(--tw-motion-fast), border-color var(--tw-motion-fast); }
+/* The tick is drawn with the pen when checked. */
+.tw-checkbox__box svg path { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset var(--tw-motion-base) var(--tw-motion-ease-pen); }
 .tw-checkbox input:checked + .tw-checkbox__box { color: var(--tw-color-action-text); border-color: var(--tw-color-action); background: var(--tw-color-action); }
-.tw-checkbox input:checked + .tw-checkbox__box svg { visibility: visible; }
+.tw-checkbox input:checked + .tw-checkbox__box svg path { stroke-dashoffset: 0; }
 .tw-checkbox input:focus-visible + .tw-checkbox__box { outline: var(--tw-focus-width) solid var(--tw-color-focus); outline-offset: var(--tw-focus-offset); }
 .tw-checkbox:has(input:disabled) { opacity: .5; cursor: not-allowed; }
 .tw-switch { display: flex; align-items: center; gap: 10px; min-height: 44px; color: var(--tw-color-text); font: 400 14px/1.5 var(--tw-font-ui); }
 .tw-switch__control { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: var(--tw-radius-sm); }
-.tw-switch__track { display: block; width: 36px; height: 20px; border: 1px solid var(--tw-color-border); border-radius: 12px; background: transparent; transition: background-color var(--tw-motion-fast); }
-.tw-switch__thumb { display: block; width: 12px; height: 12px; border-radius: 50%; margin: 3px; background: var(--tw-color-text); transition: transform var(--tw-motion-fast); }
-.tw-switch__control[aria-checked='true'] .tw-switch__track { background: var(--tw-color-discovery); border-color: var(--tw-color-charcoal); }
+/* On: lime sweeps across the track and the thumb springs over. */
+.tw-switch__track { display: block; width: 36px; height: 20px; border: 1px solid var(--tw-color-border); border-radius: 12px; background: linear-gradient(var(--tw-color-discovery) 0 0) no-repeat left / 0% 100%; transition: background-size var(--tw-motion-base) var(--tw-motion-ease-mark), border-color var(--tw-motion-fast); }
+.tw-switch__thumb { display: block; width: 12px; height: 12px; border-radius: 50%; margin: 3px; background: var(--tw-color-text); transition: transform var(--tw-motion-base) var(--tw-motion-ease-mechanism), background-color var(--tw-motion-fast); }
+.tw-switch__control[aria-checked='true'] .tw-switch__track { background-size: 100% 100%; border-color: var(--tw-color-charcoal); }
 .tw-switch__control[aria-checked='true'] .tw-switch__thumb { background: var(--tw-color-charcoal); transform: translateX(16px); }
 .tw-switch label { cursor: pointer; }
 .tw-switch:has(button:disabled) { opacity: .5; }
@@ -92,10 +113,14 @@
 .tw-empty-state__body p { margin: 0; }
 .tw-empty-state__action { margin-top: 24px; }
 .tw-tabs { min-width: 0; color: var(--tw-color-text); font-family: var(--tw-font-ui); }
-.tw-tabs__list { display: flex; gap: 24px; border-bottom: 1px solid var(--tw-color-border); overflow-x: auto; padding: 5px 5px 0; margin: -5px -5px 0; scrollbar-width: thin; }
+.tw-tabs__list { position: relative; display: flex; gap: 24px; border-bottom: 1px solid var(--tw-color-border); overflow-x: auto; padding: 5px 5px 0; margin: -5px -5px 0; scrollbar-width: thin; }
 .tw-tabs__tab { position: relative; flex: 0 0 auto; min-height: 48px; padding: 10px 0 12px; border: 0; border-bottom: 4px solid transparent; background: transparent; color: var(--tw-color-muted); font: 500 14px/1.5 var(--tw-font-ui); cursor: pointer; }
 .tw-tabs__tab:hover { color: var(--tw-color-text); }
 .tw-tabs__tab[aria-selected='true'] { color: var(--tw-color-text); border-bottom-color: var(--tw-color-accent); }
+/* While the selection changes, one underline travels from the previous tab to the new one. */
+.tw-tabs__indicator { position: absolute; bottom: 0; left: 0; width: var(--tw-tab-w); height: 4px; background: var(--tw-color-accent); translate: var(--tw-tab-x) 0; pointer-events: none; animation: tw-tab-slide var(--tw-motion-mechanism) var(--tw-motion-ease-mechanism) both; }
+@keyframes tw-tab-slide { from { width: var(--tw-tab-from-w); translate: var(--tw-tab-from-x) 0; } }
+.tw-tabs__list[data-sliding='true'] .tw-tabs__tab[aria-selected='true'] { border-bottom-color: transparent; }
 .tw-tabs__panel { padding-block: 24px; font-size: 15px; line-height: 1.65; }
 .tw-tabs__panel[hidden] { display: none; }
 .tw-figure { min-width: 0; margin: 0; color: var(--tw-color-text); }
@@ -116,7 +141,11 @@
   .tw-tabs__list { gap: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tw-button, .tw-input, .tw-text-link, .tw-switch__thumb, .tw-switch__track { transition: none; }
-  .tw-spinner { animation: none; border-right-color: currentColor; border-style: dotted; }
-  .tw-button:not(:disabled):hover, .tw-button:not(:disabled):active { transform: none; }
+  .tw-button, .tw-button::before, .tw-card::before, .tw-input, .tw-text-link__label, .tw-button__label, .tw-switch__thumb, .tw-switch__track, .tw-checkbox__box, .tw-checkbox__box svg path, [data-tw-icon^='arrow'] { transition: none; }
+  .tw-spinner { animation: none; }
+  .tw-spinner__asterisk { display: none; }
+  .tw-spinner__ring { display: inline; }
+  .tw-button:not(:disabled):active { translate: none; }
+  .tw-tabs__indicator { display: none; }
 }
+@media print { .tw-text-link__label { padding-bottom: 0; background: none; } .tw-button::before, .tw-card::before { display: none; } }

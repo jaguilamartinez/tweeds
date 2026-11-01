@@ -1,13 +1,15 @@
 import { useId } from 'react';
+import { useReveal } from '@tinker-works/ui';
 
-/** An authored drawing for documentation examples, separate from the UI library. */
-export function FigureStudy() {
+/** An authored drawing for documentation examples, separate from the UI library. Pass drafted={false} when a surrounding root already reveals it. */
+export function FigureStudy({ drafted = true }: { drafted?: boolean }) {
   const id = useId();
+  const reveal = useReveal<SVGSVGElement>({ threshold: 0.4 });
   const titleId = `${id}-title`;
   const gridId = `${id}-grid`;
 
   return (
-    <svg viewBox="0 0 640 360" role="img" aria-labelledby={titleId} focusable="false">
+    <svg ref={drafted ? reveal.ref : undefined} viewBox="0 0 640 360" role="img" aria-labelledby={titleId} focusable="false">
       <title id={titleId}>Two interface regions joined by a highlighted connection, with alignment guides and selected content.</title>
       <defs>
         <pattern id={gridId} width="24" height="24" patternUnits="userSpaceOnUse">
@@ -15,7 +17,7 @@ export function FigureStudy() {
         </pattern>
       </defs>
       <rect x="24" y="24" width="592" height="312" fill={`url(#${gridId})`} opacity=".2" />
-      <g fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      <g className="tw-draft" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <g opacity=".35" strokeWidth=".8" strokeDasharray="8 4 2 4">
           <path d="M42 72H598M42 280H598M80 38V322M320 38V322M560 38V322" />
           <path d="m72 62 182 1m132-1 182 1" />
